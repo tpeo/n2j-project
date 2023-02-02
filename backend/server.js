@@ -1,5 +1,5 @@
+const firebase = require("./firebase.js");
 require("dotenv").config();
-import "./firebase.js";
 
 const express = require("express");
 const app = express();
