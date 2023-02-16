@@ -8,7 +8,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-export const auth = (req, res, next) => {
+ const auth = (req, res, next) => {
   try {
     const tokenId = req.get("Authorization").split("Bearer ")[1];
     return admin
@@ -23,3 +23,4 @@ export const auth = (req, res, next) => {
     res.status(400).send("Errors");
   }
 };
+module.exports = {db, auth}
