@@ -22,7 +22,7 @@ const Layout = () => {
       </nav>
 
       <Outlet />
-      <SearchBar />
+      <SearchBar placeholder="Search for an apartment" />
     </>
   );
 };
