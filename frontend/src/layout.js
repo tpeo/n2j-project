@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import SearchBar from "./SearchBar.js";
 
 const Layout = () => {
   return (
@@ -21,8 +22,9 @@ const Layout = () => {
       </nav>
 
       <Outlet />
+      <SearchBar />
     </>
-  )
+  );
 };
 
 export default Layout;
