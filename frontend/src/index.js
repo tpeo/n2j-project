@@ -16,12 +16,13 @@ root.render(
     <App />
     <BrowserRouter>
       <Routes>
+        
         <Route path="/" element={<Layout />}>
+          <Route path="SearchBar" element={<SearchBar />} />
           <Route index element={<Home />} />
           <Route path="apts" element={<Apts />} />
           <Route path="newapt" element={<Newapt />} />
         </Route>
-        <Route path="SearchBar" element={<SearchBar />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
