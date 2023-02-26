@@ -5,8 +5,10 @@ import './index.css';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals.js';
 import Home from "./home.js";
+import Apts from "./apts.js";
 import Newapt from "./newapt.js";
 import Layout from "./layout.js";
+import SearchBar from "./searchbar.js";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,8 +18,10 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="apts" element={<Apts />} />
           <Route path="newapt" element={<Newapt />} />
         </Route>
+        <Route path="searchbar" element={<SearchBar />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
