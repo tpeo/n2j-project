@@ -4,26 +4,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App.js";
 import reportWebVitals from "./reportWebVitals.js";
-import Home from "./home.js";
-import Apts from "./apts.js";
-import Newapt from "./newapt.js";
-import Layout from "./layout.js";
-import SearchBar from "./SearchBar.js";
+import Home from "./pages/home.js";
+import Apts from "./pages/apts.js";
+import Newapt from "./pages/newapt.js";
+import Login from "./pages/login.js";
+import Layout from "./components/layout.js";
+import SearchBar from "./components/SearchBar.js";
+import AuthContext, { useProvideAuth } from "./context/authentication.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="apts" element={<Apts />} />
-          <Route path="newapt" element={<Newapt />} />
-        </Route>
-        <Route path="SearchBar" element={<SearchBar />} />
-      </Routes>
-    </BrowserRouter>
+    
+      <App />
   </React.StrictMode>
 );
 

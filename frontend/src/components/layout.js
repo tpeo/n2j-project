@@ -18,11 +18,20 @@ const Layout = () => {
           <li>
             <Link to="/newapt">Add Apartment</Link>
           </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+          <li>
+            <Link to="/logout">Log Out</Link>
+          </li>
         </ul>
       </nav>
 
       <Outlet />
-      <SearchBar />
+      <SearchBar placeholder="Search for an apartment" />
     </>
   );
 };
