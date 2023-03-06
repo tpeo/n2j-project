@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import Grid from "@mui/material/Grid";
 
 // Replace the following with your app's Firebase project configuration
 const firebaseConfig = {

@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/tpeo/n2j-project#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.12",
     "express": "^4.18.2"
   }
 }
