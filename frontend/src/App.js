@@ -12,6 +12,7 @@ import Signup from "./pages/signup.js";
 import Logout from "./pages/logout.js";
 import Layout from "./components/layout.js";
 import SearchBar from "./components/SearchBar.js";
+import { Button } from '@mui/material';
 //import { AuthContext } from "./context/auth.js";
 import AuthContext, { useProvideAuth } from "./context/authentication.js";
 

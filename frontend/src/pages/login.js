@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/authentication.js";
+import { Button } from '@mui/material';
+
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -64,7 +66,8 @@ function Login() {
                 <input type="text" name="email" onChange={handleChange} />
                 <h1>Password:</h1>
                 <input type="password" name="password" onChange={handleChange} />
-                <button onClick={handleLogin}>Login</button>
+                
+                <Button variant="contained" onClick={handleLogin}>Login</Button>
             </form>
         </div>
 
