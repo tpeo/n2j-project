@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/authentication.js";
 // import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+// import Grid from "@mui/material/Grid";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -59,7 +59,7 @@ function Login() {
 
   return (
     <div className="login">
-      <Grid container component="main" sx={{ height: "100vh" }}></Grid>
+      {/* <Grid container component="main" sx={{ height: "100vh" }}></Grid> */}
       <form>
         <h1>Email: </h1>
         <input type="text" name="email" onChange={handleChange} />

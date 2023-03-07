@@ -15,13 +15,11 @@ import SearchBar from "./components/SearchBar.js";
 //import { AuthContext } from "./context/auth.js";
 import AuthContext, { useProvideAuth } from "./context/authentication.js";
 
-
 function App() {
   return (
-    <AuthContext.Provider value = {useProvideAuth()}>
+    <AuthContext.Provider value={useProvideAuth()}>
       <BrowserRouter>
         <Routes>
-          
           <Route path="/" element={<Layout />}>
             <Route path="SearchBar" element={<SearchBar />} />
             <Route index element={<Home />} />
