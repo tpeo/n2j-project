@@ -6,6 +6,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals.js";
 import Home from "./pages/home.js";
 import Apts from "./pages/apts.js";
+import Myapts from "./pages/myapts.js";
 import Newapt from "./pages/newapt.js";
 import Login from "./pages/login.js";
 import Signup from "./pages/signup.js";
@@ -25,6 +26,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="apts" element={<Apts />} />
             <Route path="newapt" element={<Newapt />} />
+            <Route path="myapts" element={<Myapts />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="Logout" element={<Logout />} />
