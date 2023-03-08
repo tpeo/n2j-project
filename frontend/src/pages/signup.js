@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/authentication.js";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Button, TextField } from '@mui/material';
 
 function Signup() {
     const [formData, setFormData] = useState({
@@ -61,11 +62,12 @@ function Signup() {
     return (
         <div className="signup">
             <form>
-                <h1>Email: </h1> 
-                <input type="text" name="email" onChange={handleChange} />
+            <h1>Email: </h1> 
+                <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email" onChange={handleChange} />
                 <h1>Password:</h1>
-                <input type="password" name="password" onChange={handleChange} />
-                <button onClick={handleSignup}>Sign Up</button>
+                <TextField id="outlined-basic" label="Password" variant="outlined" type="password" name="password" onChange={handleChange} />
+                <br />
+                <Button variant="contained" onClick={handleSignup}>Login</Button>
             </form>
         </div>
 

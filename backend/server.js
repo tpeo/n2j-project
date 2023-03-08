@@ -59,6 +59,18 @@ app.get('/get-all', async(req, res)=> {
   }
 })
 
+app.post('/get-user', async(req, res)=> {
+  try {
+    const {email} = req.body;
+    const snapshot = await firebase.db.collection('users').get(email);
+    res.status(200).send(snapshot.docs.map(doc => doc.data()));
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send("Can't retrieve Apartment ID list");
+  }
+})
+
 app.listen(4000, () => {
   console.log("Server running on port 4000");
 });
