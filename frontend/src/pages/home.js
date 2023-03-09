@@ -1,12 +1,14 @@
 import { Page, SearchInput, Card } from "react-onsenui";
 import "onsenui/css/onsen-css-components.css";
 import { Button } from "@mui/material";
+import {AcUnit} from "@mui/icons-material";
 
 const Home = () => {
   return (
     <div class="scroll">
       <h1>Home</h1>
       <Button>click here</Button>
+      <AcUnit></AcUnit>
       <Card>
         <h6>Torre</h6>
         <p>

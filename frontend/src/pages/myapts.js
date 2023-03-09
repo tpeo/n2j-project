@@ -13,35 +13,38 @@ const Myapts = () => {
 
     const navigate = useNavigate();
 
-    const fetchData = () =>
-    fetch("http://localhost:4000/get-user", 
-    {
-        method: "POST",
-        body: JSON.stringify(
-            {
-                "email": email,
-            })
-        }
-    )
-        .then(response => response.json())
-        .then(data => setApts(data))
+    
 
     useEffect(()=> {
-        if (auth.loggedIn) {
+        const fetchApts = async () =>
+        await fetch("http://localhost:4000/get-user", 
+        {
+            method: "POST",
+            body: JSON.stringify(
+                {
+                    "email": email,
+                })
+            }
+        )
+        .then(response => response.json())
+        .then(data => setApts(data[0]["apts"]));
+        if (!auth.loggedIn) {
             navigate("/");
         }
-        fetchData()
+        fetchApts();
     }, [])
-    
-    console.log(apts);
-
 
     return (
     <div>
         <h1>My Apartments</h1>
         <p>
-            {JSON.stringify(apts[0])}
+            {JSON.stringify(apts)}
         </p>
+        <ul>
+            {apts.map(apt => {
+                return <li>{apt}</li>
+            })}
+        </ul>
     </div>
     );
   };
