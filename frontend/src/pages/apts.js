@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { Page, SearchInput, Card } from "react-onsenui";
 
 const Apts = () => {
     const [apts, setApts] = useState([]);
@@ -18,7 +19,11 @@ const Apts = () => {
     <div>
         <h1>Apartments</h1>
         <p>
-            {JSON.stringify(apts)}
+            {apts && apts.map((apt) => <Card>
+                {apt["apt_id"]}
+                {apt["name"]}
+            </Card>
+            )}
         </p>
     </div>
     );
