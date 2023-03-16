@@ -7,7 +7,7 @@ var cors = require('cors');
 
 app.use(express.json());
 app.use(
-  cors({origin:['http://localhost:3000', 'http://127.0.0.1:3000']})
+  cors({origin: '*'})
 )
 app.post('/add-apt', async (req, res) => {
   try {
@@ -29,7 +29,7 @@ app.post('/add-apt', async (req, res) => {
   }
 });
 
-app.get('/get-apt', async (req, res) => {
+app.post('/get-apt', async (req, res) => {
   try {
     console.log(req.body);
     const {apt_id} = req.body;
@@ -39,7 +39,7 @@ app.get('/get-apt', async (req, res) => {
       res.status(200).send(doc.data());
     }
     else {
-      res.status(200).send("No such apartment");
+      res.status(200).send({ error: "No such apartment"});
     }
   }
   catch (error) {
@@ -64,6 +64,29 @@ app.post('/get-user', async(req, res)=> {
     const {email} = req.body;
     const snapshot = await firebase.db.collection('users').get(email);
     res.status(200).send(snapshot.docs.map(doc => doc.data()));
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send("Can't retrieve Apartment ID list");
+  }
+})
+
+app.post('/get-user-apts', async(req, res)=> {
+  try {
+    const {email} = req.body;
+    const aptids = await firebase.db.collection('users').get(email);
+    const houses = await firebase.db.collection('houses').get();
+    const aptidlist = aptids.docs.map(doc => doc.data());
+    const houselist = houses.docs.map(doc => doc.data());
+    var apts = [];
+    for (aptid in aptidlist[0]["apts"]) {
+      for (house in houselist) {
+        if (parseInt(aptidlist[0]["apts"][aptid]) === parseInt(houselist[house]["apt_id"])) {
+          apts.push(houselist[house]);
+        }
+      }
+    }
+    res.status(200).send(apts);
   }
   catch (error) {
     console.error(error);
