@@ -14,23 +14,23 @@ import Logout from "./pages/logout.js";
 import Layout from "./components/layout.js";
 import SearchBar from "./components/SearchBar.js";
 //import { AuthContext } from "./context/auth.js";
+import {Container, Nav, Navbar} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 import AuthContext, { useProvideAuth } from "./context/authentication.js";
 
 function App() {
   return (
     <AuthContext.Provider value={useProvideAuth()}>
+      <Layout />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="SearchBar" element={<SearchBar />} />
-            <Route index element={<Home />} />
-            <Route path="apts" element={<Apts />} />
-            <Route path="newapt" element={<Newapt />} />
-            <Route path="myapts" element={<Myapts />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="Logout" element={<Logout />} />
-          </Route>
+          <Route index element={<Home />} />
+          <Route path="apts" element={<Apts />} />
+          <Route path="newapt" element={<Newapt />} />
+          <Route path="myapts" element={<Myapts />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

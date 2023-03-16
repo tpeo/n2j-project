@@ -1,7 +1,6 @@
-import { Page, SearchInput, Card } from "react-onsenui";
-import "onsenui/css/onsen-css-components.css";
-import { Button } from "@mui/material";
-//import {AcUnit} from "@mui/icons-material";
+import React from "react";
+import {Button, Card} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Home = () => {
   return (

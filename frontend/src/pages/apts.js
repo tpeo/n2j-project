@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { Page, SearchInput, Card } from "react-onsenui";
+import {Button, Card} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Apts = () => {
     const [apts, setApts] = useState([]);
