@@ -12,6 +12,7 @@ import Login from "./pages/login.js";
 import Signup from "./pages/signup.js";
 import Logout from "./pages/logout.js";
 import Layout from "./components/layout.js";
+import AptDetail from "./pages/aptdetail.js";
 import SearchBar from "./components/SearchBar.js";
 //import { AuthContext } from "./context/auth.js";
 import {Container, Nav, Navbar} from 'react-bootstrap';
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="apts" element={<Apts />} />
+          <Route path="apts/:aptid" element={<AptDetail />} />
           <Route path="newapt" element={<Newapt />} />
           <Route path="myapts" element={<Myapts />} />
           <Route path="login" element={<Login />} />
