@@ -1,21 +1,18 @@
 import React, {useEffect, useState, useContext} from "react";
-import {Button, Card} from 'react-bootstrap'
+import {Button, Card, Row, Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useNavigate } from "react-router-dom";
+import '../App.css';
+import SearchBar from "../components/SearchBar.js";
 import AuthContext from "../context/authentication.js";
 
 const Myapts = () => {
     const [apts, setApts] = useState([]);
-
-    const [apt, setApt] = useState([]);
 
     const auth = useContext(AuthContext);
 
     const email = window.localStorage.getItem("username");
 
     console.log(email);
-
-    const navigate = useNavigate();
     
 
     const fetchApts = async () =>
@@ -36,16 +33,24 @@ const Myapts = () => {
     }, []);
 
     return (
-    <div>
+    <div class="aptlist">
         <h1>My Apartments</h1>
-        <p>
-            {apts && apts.map((apt) => <Card>
-                {apt["apt_id"]}
-                {apt["name"]}
-            </Card>
+        <SearchBar />
+        <Row xs={1} md={2} className="g-4">
+            {apts && apts.map((apt) => 
+            <div>
+                <br />
+                <Col>
+                    <Card>
+                        <Card.Title>{apt["name"]}</Card.Title>
+                        <Card.Body>{apt["apt_id"]}</Card.Body>
+                        <Card.Body>{apt["rating"]}</Card.Body>
+                        <Button href={"/apts/" + apt["apt_id"]}>See More</Button>
+                    </Card>
+                </Col>
+            </div>
             )}
-        </p>
-        
+        </Row>
     </div>
     );
   };

@@ -44,7 +44,7 @@ app.post('/get-apt', async (req, res) => {
   }
   catch (error) {
     console.error(error);
-    res.status(500).send("Can't retrieve this apartment");
+    res.status(500).send({ error: "Can't retrieve this apartment"});
   }
 })
 

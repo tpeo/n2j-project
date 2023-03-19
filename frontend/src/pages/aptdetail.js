@@ -12,8 +12,6 @@ const AptDetail = () => {
     await fetch("http://localhost:4000/get-apt", 
     {
         method: "POST",
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
         body: JSON.stringify(
             {
                 "apt_id": aptid
@@ -25,11 +23,11 @@ const AptDetail = () => {
 
     useEffect(()=> {
         fetchApt();
-    }, []);
+    }, [aptid]);
 
   return (
     <div class="scroll">
-      <h1>Home</h1>
+      <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
       <p>{aptid}</p>
       <p>{JSON.stringify(apt)}</p>
     </div>
