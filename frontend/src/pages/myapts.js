@@ -14,7 +14,6 @@ const Myapts = () => {
 
     console.log(email);
     
-
     const fetchApts = async () =>
     await fetch("http://localhost:4000/get-user-apts", 
     {

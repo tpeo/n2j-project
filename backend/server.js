@@ -48,10 +48,21 @@ app.post('/get-apt', async (req, res) => {
   }
 })
 
-app.get('/get-all', async(req, res)=> {
+app.post('/get-apts', async(req, res)=> {
   try {
+    const {name} = req.body;
     const snapshot = await firebase.db.collection('houses').get();
-    res.status(200).send(snapshot.docs.map(doc => doc.data()));
+    const aptlist = snapshot.docs.map(doc => doc.data());
+    console.log(aptlist);
+    console.log(name);
+    apts = [];
+    for (apt in aptlist) {
+      if (aptlist[apt]["name"].toLowerCase().includes(name.toLowerCase())) {
+        apts.push(aptlist[apt]);
+      }
+    }
+    console.log(apts);
+    res.status(200).send(apts);
   }
   catch (error) {
     console.error(error);
