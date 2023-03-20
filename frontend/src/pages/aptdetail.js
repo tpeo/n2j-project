@@ -8,23 +8,22 @@ const AptDetail = () => {
 
   const [apt, setApt] = useState([]);
 
-  const fetchApt = async () =>
+  useEffect(()=> {
+    const fetchApt = async () =>
     await fetch("http://localhost:4000/get-apt", 
     {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(
-            {
-                "apt_id": aptid
-            })
-        }
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(
+        {
+          "apt_id": aptid,
+        })
+      }
     )
     .then(response => response.json())
     .then(data => {setApt(data);});
-
-    useEffect(()=> {
-        fetchApt();
-    }, [aptid]);
+    fetchApt();
+  }, [aptid]);
 
   return (
     <div class="scroll">
@@ -32,7 +31,7 @@ const AptDetail = () => {
       <p>{aptid}</p>
       <p>{JSON.stringify(apt)}</p>
       <Row xs={1} md={2} className="g-4">
-        {apt && apt["floor_plans"].map((fp) => 
+        {apt["floor_plans"] && apt["floor_plans"].map((fp) => 
           <div>
             <br />
             <Col>
