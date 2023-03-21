@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/authentication.js";
 import { Button, TextField } from '@mui/material';
-import { signInWithEmailAndPassword} from "firebase/auth";
 //import TextField from '@mui/material/TextField';
 
 
