@@ -25,7 +25,7 @@ function Login() {
 
   useEffect(() => {
     if (auth.loggedIn) {
-      navigate("/");
+      navigate("/apts");
     }
   }, []);
 
@@ -43,7 +43,7 @@ function Login() {
     } else {
       try {
         await auth.loginUser(formData.email, formData.password);
-        navigate("/");
+        navigate("/apts");
         setErrorMessage("");
       } catch (error) {
         setErrorMessage(error);

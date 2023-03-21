@@ -25,7 +25,7 @@ function Logout() {
 
     useEffect(() => {
         if (!auth.loggedIn) {
-            navigate("/");
+            navigate("/apts");
         }
     });
 

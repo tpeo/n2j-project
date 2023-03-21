@@ -24,7 +24,7 @@ function Signup() {
 
     useEffect(() => {
         if (auth.loggedIn) {
-            navigate("/");
+            navigate("/apts");
         }
     }, []);
 
@@ -43,7 +43,7 @@ function Signup() {
         else {
             try {
                 createUserWithEmailAndPassword(getAuth(), formData.email, formData.password);
-                navigate("/");
+                navigate("/apts");
                 setErrorMessage("");
             } 
             catch (error) {

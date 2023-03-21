@@ -9,7 +9,7 @@ const Layout = () => {
     <div>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="/">N2J</Navbar.Brand>
+          <Navbar.Brand href="/apts">N2J</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/apts">All Apartments</Nav.Link>
             {email ? <Nav.Link href="/myapts">My Apartments</Nav.Link> : <p></p>}
