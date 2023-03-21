@@ -32,6 +32,23 @@ const Apts = () => {
         console.log(name);
     }, [name])
 
+    useEffect(() => {
+        const keyDownHandler = event => {
+          console.log('User pressed: ', event.key);
+      
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            console.log('User pressed enter');
+          }
+        };
+      
+        document.addEventListener('keydown', keyDownHandler);
+      
+        return () => {
+          document.removeEventListener('keydown', keyDownHandler);
+        };
+      }, []);
+
     return (
     <div class="aptlist">
         <h1>Apartments</h1>

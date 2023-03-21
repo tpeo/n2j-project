@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const Layout = () => {
+  const email = window.localStorage.getItem("username");
+
   return (
     <div>
       <Navbar bg="light" variant="light">
@@ -10,11 +12,10 @@ const Layout = () => {
           <Navbar.Brand href="/">N2J</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/apts">All Apartments</Nav.Link>
-            <Nav.Link href="/myapts">My Apartments</Nav.Link>
+            {email ? <Nav.Link href="/myapts">My Apartments</Nav.Link> : <p></p>}
             <Nav.Link href="/newapt">Submit New Apartment</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/signup">Signup</Nav.Link>
-            <Nav.Link href="/logout">Logout</Nav.Link>
+            {email ? <Nav.Link href="/logout">Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
+            {email ? <p></p> : <Nav.Link href="/signup">Signup</Nav.Link>}
           </Nav>
         </Container>
       </Navbar>

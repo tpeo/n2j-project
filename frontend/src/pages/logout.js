@@ -49,7 +49,6 @@ function Logout() {
         <div className="login">
             <Button variant="contained" onClick={handleLogout}>Log Out</Button>
         </div>
-
     );
 
 }

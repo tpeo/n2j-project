@@ -85,14 +85,21 @@ app.post('/get-user', async(req, res)=> {
 app.post('/get-user-apts', async(req, res)=> {
   try {
     const {email} = req.body;
-    const aptids = await firebase.db.collection('users').get(email);
+    if (email === null) {
+      res.status(200).send([]);
+      return;
+    }
+    console.log(email);
+    const aptids = await firebase.db.collection("users").doc(email).get();
     const houses = await firebase.db.collection('houses').get();
-    const aptidlist = aptids.docs.map(doc => doc.data());
+    const aptidlist = aptids.data();
     const houselist = houses.docs.map(doc => doc.data());
+    console.log(aptidlist);
+    console.log(houselist);
     var apts = [];
-    for (aptid in aptidlist[0]["apts"]) {
+    for (aptid in aptidlist["apts"]) {
       for (house in houselist) {
-        if (parseInt(aptidlist[0]["apts"][aptid]) === parseInt(houselist[house]["apt_id"])) {
+        if (parseInt(aptidlist["apts"][aptid]) === parseInt(houselist[house]["apt_id"])) {
           apts.push(houselist[house]);
         }
       }

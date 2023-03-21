@@ -18,6 +18,7 @@ const Myapts = () => {
     await fetch("http://localhost:4000/get-user-apts", 
     {
         method: "POST",
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(
             {
                 "email": email,
@@ -35,7 +36,7 @@ const Myapts = () => {
     <div class="aptlist">
         <h1>My Apartments</h1>
         <SearchBar />
-        <Row xs={1} md={2} className="g-4">
+        {!email ? <p><br />To use "My Apartments, log in first.</p> : <Row xs={1} md={2} className="g-4">
             {apts && apts.map((apt) => 
             <div>
                 <br />
@@ -49,7 +50,7 @@ const Myapts = () => {
                 </Col>
             </div>
             )}
-        </Row>
+        </Row>}
     </div>
     );
   };

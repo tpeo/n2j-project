@@ -26,11 +26,11 @@ const AptDetail = () => {
   }, [aptid]);
 
   return (
-    <div class="scroll">
+    <div class="aptlist">
       <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
       <p>{aptid}</p>
       <p>{JSON.stringify(apt)}</p>
-      <Row xs={1} md={2} className="g-4">
+      <Row xs={1} md={3} className="g-4">
         {apt["floor_plans"] && apt["floor_plans"].map((fp) => 
           <div>
             <br />
@@ -39,12 +39,13 @@ const AptDetail = () => {
                 <Card.Title>{fp["cost"]}</Card.Title>
                 <Card.Body>{fp["ba"]}</Card.Body>
                 <Card.Body>{fp["br"]}</Card.Body>
-                <Card.Body>{fp["is_double"]}</Card.Body>
+                <Card.Body>{fp["is_double"] ? "DOUBLE" : "SINGLE"}</Card.Body>
               </Card>
             </Col>
           </div>
         )}
       </Row>
+      <p>Per-month parking cost: {apt["parking_cost"] ? apt["parking_cost"] : "N/A"}</p>
     </div>
   );
 };
