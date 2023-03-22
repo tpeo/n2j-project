@@ -71,6 +71,7 @@ const AptDetail = () => {
           return (
             <div>
               <Card>
+                <Card.Header>By: {review["name"]}</Card.Header>
                 <Card.Body>
                   <Card.Text>
                   {review["review"]}
