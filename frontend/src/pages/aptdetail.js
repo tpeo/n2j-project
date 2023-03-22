@@ -55,7 +55,7 @@ const AptDetail = () => {
       <h2>Details:</h2>
       <p>Per-month parking cost: {apt["parking_cost"] ? apt["parking_cost"] : "N/A"}</p>
       <br />
-      <h2>Reviews</h2>
+      <h2>Add Your Review</h2>
       {email ? <div>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Add comment here</Form.Label>
@@ -63,6 +63,25 @@ const AptDetail = () => {
         </Form.Group>
         <Button>Submit</Button>
       </div> : <p>Log in to leave a review.</p>}
+      <br />
+      {email ? 
+      <div>
+        <h3>Reviews: </h3>
+        {apt["reviews"] ? apt["reviews"].map((review) => {
+          return (
+            <div>
+              <Card>
+                <Card.Body>
+                  <Card.Text>
+                  {review["review"]}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          );
+        }) : <p>No reviews yet.</p>}
+      </div>
+      : <p>Review not viewable before log in.</p>}
       <br />
       <h2>Notes</h2>
       <p>Costs are per month, not including fees.</p>
