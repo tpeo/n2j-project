@@ -1,4 +1,5 @@
 const firebase = require("./firebase.js");
+const { FieldValue } = require('firebase-admin/firestore');
 require("dotenv").config();
 
 const express = require("express");
@@ -79,6 +80,28 @@ app.post('/get-user', async(req, res)=> {
   catch (error) {
     console.error(error);
     res.status(500).send("Can't retrieve Apartment ID list");
+  }
+})
+
+app.post('/add-review', async(req, res)=> {
+  try {
+    const {email, apt_id, comment} = req.body;
+    const snapshot = await firebase.db.collection('users').doc(email);
+    const userinfo = await snapshot.get();
+    const entryRef = await firebase.db.collection('houses').doc(apt_id+"");
+    entryRef.update(
+      {
+        reviews: FieldValue.arrayUnion({
+          "name": userinfo.data()["name"],
+          "review": comment
+        })
+      }
+    )
+    res.status(200).send({"message":"Review added successfully"});
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send({"error":"Error posting comment"});
   }
 })
 
