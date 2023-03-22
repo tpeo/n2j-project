@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext} from "react";
 import {Button, Card, Row, Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../App.css';
-import SearchBar from "../components/SearchBar.js";
 import AuthContext from "../context/authentication.js";
 
 const Myapts = () => {
@@ -35,7 +34,6 @@ const Myapts = () => {
     return (
     <div class="aptlist">
         <h1>My Apartments</h1>
-        <SearchBar />
         {!email ? <p><br />To use "My Apartments, log in first.</p> : <Row xs={1} md={2} className="g-4">
             {apts && apts.map((apt) => 
             <div>

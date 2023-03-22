@@ -10,10 +10,8 @@ import Myapts from "./pages/myapts.js";
 import Newapt from "./pages/newapt.js";
 import Login from "./pages/login.js";
 import Signup from "./pages/signup.js";
-import Logout from "./pages/logout.js";
 import Layout from "./components/layout.js";
 import AptDetail from "./pages/aptdetail.js";
-import SearchBar from "./components/SearchBar.js";
 //import { AuthContext } from "./context/auth.js";
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -25,14 +23,14 @@ function App() {
       <Layout />
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Apts />} />
           <Route path="apts" element={<Apts />} />
           <Route path="apts/:aptid" element={<AptDetail />} />
           <Route path="newapt" element={<Newapt />} />
           <Route path="myapts" element={<Myapts />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="logout" element={<Logout />} />
+          <Route path="logout" element={<Apts />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
