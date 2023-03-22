@@ -13,7 +13,7 @@ const Layout = () => {
           <Nav className="me-auto">
             <Nav.Link href="/apts">All Apartments</Nav.Link>
             {email ? <Nav.Link href="/myapts">My Apartments</Nav.Link> : <p></p>}
-            <Nav.Link href="/newapt">Submit New Apartment</Nav.Link>
+            <Nav.Link href="/newapt" disabled>Submit New Apartment</Nav.Link>
             {email ? <Nav.Link href="/logout">Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
             {email ? <p></p> : <Nav.Link href="/signup">Signup</Nav.Link>}
           </Nav>

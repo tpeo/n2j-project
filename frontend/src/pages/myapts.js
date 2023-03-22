@@ -41,12 +41,17 @@ const Myapts = () => {
             <div>
                 <br />
                 <Col>
-                    <Card>
+                <Card>
+                    <Card.Body>
                         <Card.Title>{apt["name"]}</Card.Title>
-                        <Card.Body>{apt["apt_id"]}</Card.Body>
-                        <Card.Body>{apt["rating"]}</Card.Body>
+                        <Card.Text>
+                            Apartment ID: {apt["apt_id"]}<br />
+                            Rating: {apt["rating"]}<br />
+                            Address: {apt["address"]}<br />
+                        </Card.Text>
                         <Button href={"/apts/" + apt["apt_id"]}>See More</Button>
-                    </Card>
+                    </Card.Body>
+                </Card>
                 </Col>
             </div>
             )}
