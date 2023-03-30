@@ -89,15 +89,18 @@ app.post('/add-review', async(req, res)=> {
     const snapshot = await firebase.db.collection('users').doc(email);
     const userinfo = await snapshot.get();
     const entryRef = await firebase.db.collection('houses').doc(apt_id+"");
-    entryRef.update(
-      {
-        reviews: FieldValue.arrayUnion({
-          "name": userinfo.data()["name"],
-          "review": comment
-        })
-      }
-    )
-    res.status(200).send({"message":"Review added successfully"});
+    if (comment !== ""){
+      entryRef.update(
+        {
+          reviews: FieldValue.arrayUnion({
+            "name": userinfo.data()["name"],
+            "review": comment
+          })
+        }
+      )
+      res.status(200).send({"message":"Review added successfully"});
+    }
+    else res.status(200).send({"message":"Review must not be empty"});
   }
   catch (error) {
     console.error(error);
