@@ -22,6 +22,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.12",
     "express": "^4.18.2",
+    "font-awesome-icons": "^1.6.0",
     "react-onsenui": "^1.13.2"
   },
   "devDependencies": {
