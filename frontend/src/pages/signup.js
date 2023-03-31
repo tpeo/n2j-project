@@ -60,7 +60,7 @@ function Signup() {
     };
     
     return (
-        <div className="signup">
+        <div class="aptlist">
             <form>
             <h1>Email: </h1> 
                 <TextField id="outlined-basic" label="Email" variant="outlined" type="text" name="email" onChange={handleChange} />
