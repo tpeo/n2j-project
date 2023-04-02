@@ -84,8 +84,24 @@ const AptDetail = () => {
         )}
       </Row>
       <br />
-      <h2>Details:</h2>
-      <p>Per-month parking cost: {apt["parking_cost"] ? apt["parking_cost"] : "N/A"}</p>
+      <h2>Additional Fees to Know:</h2>
+      <p>{apt["fees"] ? apt["fees"].map((fee) => {
+          return (
+            <div>
+              <Card>
+                <Card.Body>
+                  <Card.Title>{fee["name"]}</Card.Title>
+                  <Card.Text>
+                  Cost: {fee["amount"]}
+                  <br />
+                  Interval: {fee["interval"]}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          );
+        })
+      : "N/A"}</p>
       <br />
       <h2>Add Your Review</h2>
       {email ? <div>
