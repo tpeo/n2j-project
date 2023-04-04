@@ -66,7 +66,7 @@ const Apts = () => {
             <div>
                 <br />
                 <Col>
-                    <Card>
+                    <Card> 
                         <Card.Body>
                             <Card.Title>{apt["name"]}</Card.Title>
                             <Card.Text>

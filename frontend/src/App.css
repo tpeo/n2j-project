@@ -40,3 +40,13 @@
 .aptlist{
   margin: 2% 10%;
 }
+
+.aptgrid{
+  display: flex;
+  align-items: stretch;
+}
+
+.aptcard{
+  background-color: #88B4D9 !important;
+  border-radius: 3px;
+}

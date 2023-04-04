@@ -18,21 +18,23 @@ import AuthContext, { useProvideAuth } from "./context/authentication.js";
 
 function App() {
   return (
-    <AuthContext.Provider value={useProvideAuth()}>
-      <Layout />
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Apts />} />
-          <Route path="apts" element={<Apts />} />
-          <Route path="apts/:aptid" element={<AptDetail />} />
-          <Route path="newapt" element={<Newapt />} />
-          <Route path="myapts" element={<Myapts />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="logout" element={<Apts />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <div class="everything">
+      <AuthContext.Provider value={useProvideAuth()}>
+        <Layout />
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Apts />} />
+            <Route path="apts" element={<Apts />} />
+            <Route path="apts/:aptid" element={<AptDetail />} />
+            <Route path="newapt" element={<Newapt />} />
+            <Route path="myapts" element={<Myapts />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="logout" element={<Apts />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    </div>
   );
 }
 

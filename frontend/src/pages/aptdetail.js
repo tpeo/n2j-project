@@ -73,8 +73,7 @@ const AptDetail = () => {
                   <Card.Title>{fp["name"]}</Card.Title>
                   <Card.Text>
                   Cost*: {fp["cost"]}<br />
-                  Bedrooms: {fp["br"]}<br />
-                  Bathrooms: {fp["ba"]}<br />
+                  {fp["br"]} BR | {fp["ba"]} BA <br />
                   Per-room: {fp["is_double"] ? "DOUBLE" : "SINGLE"}
                   </Card.Text>
                 </Card.Body>
@@ -84,24 +83,46 @@ const AptDetail = () => {
         )}
       </Row>
       <br />
-      <h2>Additional Fees to Know:</h2>
-      <p>{apt["fees"] ? apt["fees"].map((fee) => {
-          return (
-            <div>
-              <Card>
+      <h2>Amenities:</h2>
+      <div class="aptgrid">
+      <Row xs={1} md={6} className="g-4">
+        {apt["amenities"] && apt["amenities"].map((amenity) => 
+          <div>
+            <br />
+            <Col>
+              <Card bg={'info'}>
                 <Card.Body>
-                  <Card.Title>{fee["name"]}</Card.Title>
+                  <Card.Title>{amenity}</Card.Title>
                   <Card.Text>
-                  Cost: {fee["amount"]}
-                  <br />
-                  Interval: {fee["interval"]}
                   </Card.Text>
                 </Card.Body>
               </Card>
-            </div>
-          );
-        })
-      : "N/A"}</p>
+            </Col>
+          </div>
+        )}
+      </Row>
+      </div>
+      <br />
+      <h2>Additional Fees to Know:</h2>
+      <br />
+      <Row xs={1} md={6} className="g-4">
+        {apt["fees"] && apt["fees"].map((fee) => 
+          <div>
+            <br />
+            <Col>
+              <Card class="aptcard">
+                <Card.Body>
+                  <Card.Title>{fee["name"]}</Card.Title>
+                  <Card.Text>
+                  Interval: {fee["interval"]}<br />
+                  Amount: ${fee["amount"]}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          </div>
+        )}
+      </Row>
       <br />
       <h2>Add Your Review</h2>
       {email ? <div>
