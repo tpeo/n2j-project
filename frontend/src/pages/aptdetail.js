@@ -129,7 +129,45 @@ const AptDetail = () => {
         <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Add comment here</Form.Label>
+        
+        <Row xs={1} md={2} className="g-4">
+          <Col>
+            <Form.Control onChange={event => setReview(event.target.value)} placeholder="Give us a tldr :)" as="textarea" rows={1} />
+          </Col>
+          <Col>
+            <Form.Select aria-label="Floor Plan Selector">
+            <option>Choose a floor plan</option>
+            {apt["floor_plans"] && apt["floor_plans"].map((fp) => 
+              <option>{fp["name"]}</option>
+            )}
+            </Form.Select>
+          </Col>
+        </Row>
+        <br />
+        <Row xs={1} md={2} className="g-4">
+          <Col>
+            Cleanliness: <br />
+            <Form.Range />
+          </Col>
+          <Col>
+            Cleanliness: <br />
+            <Form.Range />
+          </Col>
+        </Row>
+        <br />
+        <Row xs={1} md={2} className="g-4">
+          <Col>
+            Cleanliness: <br />
+            <Form.Range />
+          </Col>
+          <Col>
+            Cleanliness: <br />
+            <Form.Range />
+          </Col>
+        </Row>
+        <br />
         <Form.Control onChange={event => setReview(event.target.value)} placeholder="Enlighten us!" as="textarea" rows={3} />
+        <br />
         <Button type="button" onClick={() => setButton(!button)}>Submit</Button>
         </Form.Group>
         </Form>
