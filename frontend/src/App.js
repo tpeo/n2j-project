@@ -12,8 +12,8 @@ import Signup from "./pages/signup.js";
 import Layout from "./components/layout.js";
 import AptDetail from "./pages/aptdetail.js";
 //import { AuthContext } from "./context/auth.js";
-import {Container, Nav, Navbar} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
+import { Container, Nav, Navbar } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 import AuthContext, { useProvideAuth } from "./context/authentication.js";
 
 function App() {
