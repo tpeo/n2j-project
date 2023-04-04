@@ -85,7 +85,8 @@ app.post('/get-user', async(req, res)=> {
 
 app.post('/add-review', async(req, res)=> {
   try {
-    const {email, apt_id, comment} = req.body;
+    const {email, apt_id, comment, title, floorplan, cleanliness,
+      maintenance, amenities, conditions, timestamp} = req.body;
     const snapshot = await firebase.db.collection('users').doc(email);
     const userinfo = await snapshot.get();
     const entryRef = await firebase.db.collection('houses').doc(apt_id+"");
@@ -94,7 +95,14 @@ app.post('/add-review', async(req, res)=> {
         {
           reviews: FieldValue.arrayUnion({
             "name": userinfo.data()["name"],
-            "review": comment
+            "review": comment,
+            "title": title,
+            "floorplan": floorplan,
+            "cleanliness": cleanliness,
+            "maintenance": maintenance,
+            "amenities": amenities,
+            "conditions": conditions,
+            "timestamp": timestamp,
           })
         }
       )

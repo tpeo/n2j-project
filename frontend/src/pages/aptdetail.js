@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from "react";
-import {Button, Card, Row, Col, Form, Modal} from 'react-bootstrap';
+import {Button, Card, Row, Col, Form, Modal, ProgressBar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useParams} from 'react-router-dom';
 
@@ -50,12 +50,19 @@ const AptDetail = () => {
           "email": email,
           "apt_id": aptid,
           "comment": review,
+          "title": title,
+          "floorplan": floorplan,
+          "cleanliness": cleanliness,
+          "maintenance": maintenance,
+          "amenities": amenities,
+          "conditions": conditions,
+          "timestamp": timestamp,
         })
       }
     )
     .then(response => response.json());
     //.then(() => setReview(""));
-    postReview();
+    if (button) postReview();
   }, [button]);
 
   useEffect(() => {
@@ -138,13 +145,12 @@ const AptDetail = () => {
         
         <Row xs={1} md={2} className="g-4">
           <Col>
-            <Form.Control onChange={event => setReview(event.target.value)} placeholder="Give us a tldr :)" as="textarea" rows={1} />
+            <Form.Control onChange={event => setTitle(event.target.value)} placeholder="Give us a tldr :)" as="textarea" rows={1} />
           </Col>
           <Col>
-            <Form.Select aria-label="Floor Plan Selector">
-            <option>Choose a floor plan</option>
+            <Form.Select value={floorplan} onChange={(e) => setFloorplan(e.target.value)} aria-label="Floor Plan Selector">
             {apt["floor_plans"] && apt["floor_plans"].map((fp) => 
-              <option>{fp["name"]}</option>
+              <option value={fp["name"]}>{fp["name"]}</option>
             )}
             </Form.Select>
           </Col>
@@ -183,11 +189,38 @@ const AptDetail = () => {
           return (
             <div>
               <Card>
-                <Card.Header>By: {review["name"]}</Card.Header>
+                <Card.Header>For {review["floorplan"]}, made on {Date(review["timestamp"])}</Card.Header>
+                
                 <Card.Body>
-                  <Card.Text>
-                  {review["review"]}
-                  </Card.Text>
+                <Row xs={1} md={4} className="g-4">
+                  <Col>
+                    Cleanliness:
+                    <ProgressBar now={review["cleanliness"]*10} label={`${review["cleanliness"]}/10`} />
+                  </Col>
+                  <Col>
+                    Maintenance:
+                    <ProgressBar now={review["maintenance"]*10} label={`${review["maintenance"]}/10`} />
+                  </Col>
+                  <Col>
+                    Amenities:
+                    <ProgressBar now={review["amenities"]*10} label={`${review["amenities"]}/10`} />
+                  </Col>
+                  <Col>
+                    Conditions & Management:
+                    <ProgressBar now={review["conditions"]*10} label={`${review["conditions"]}/10`} />
+                  </Col>
+                </Row>
+                <br />
+                <blockquote className="blockquote mb-0">
+                  <h4>{review['title']}</h4>
+                  <p>
+                    {' '}
+                    {review['review']}{' '}
+                  </p>
+                  <footer className="blockquote-footer">
+                    {review['name']}
+                  </footer>
+                </blockquote>
                 </Card.Body>
               </Card>
             </div>
