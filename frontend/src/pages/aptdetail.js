@@ -9,6 +9,12 @@ const AptDetail = () => {
   const [apt, setApt] = useState([]);
 
   const [review, setReview] = useState("");
+  const [floorplan, setFloorplan] = useState("");
+  const [title, setTitle] = useState("");
+  const [cleanliness, setCleanliness] = useState(-1);
+  const [maintenance, setMaintenance] = useState(-1);
+  const [amenities, setAmenities] = useState(-1);
+  const [conditions, setConditions] = useState(-1);
 
   const [button, setButton] = useState(false);
 
@@ -32,6 +38,8 @@ const AptDetail = () => {
   }, [aptid]);
 
   useEffect(()=> {
+    const dateTime = Date.now();
+    const timestamp = Math.floor(dateTime / 1000);
     const postReview = async () =>
     await fetch("http://localhost:4000/add-review", 
     {
@@ -47,7 +55,6 @@ const AptDetail = () => {
     )
     .then(response => response.json());
     //.then(() => setReview(""));
-    console.log("Effect triggered");
     postReview();
   }, [button]);
 
@@ -104,7 +111,6 @@ const AptDetail = () => {
       </div>
       <br />
       <h2>Additional Fees to Know:</h2>
-      <br />
       <Row xs={1} md={6} className="g-4">
         {apt["fees"] && apt["fees"].map((fee) => 
           <div>
@@ -144,25 +150,22 @@ const AptDetail = () => {
           </Col>
         </Row>
         <br />
-        <Row xs={1} md={2} className="g-4">
+        <Row xs={1} md={4} className="g-4">
           <Col>
-            Cleanliness: <br />
-            <Form.Range />
+            Cleanliness: {cleanliness >= 0 ? cleanliness + "/10" : "Rate Here"} <br />
+            <Form.Range min={0} max={10} onChange={event => setCleanliness(event.target.value)}/>
           </Col>
           <Col>
-            Cleanliness: <br />
-            <Form.Range />
-          </Col>
-        </Row>
-        <br />
-        <Row xs={1} md={2} className="g-4">
-          <Col>
-            Cleanliness: <br />
-            <Form.Range />
+            Maintenance: {maintenance >= 0 ? maintenance + "/10" : "Rate Here"} <br />
+            <Form.Range min={0} max={10} onChange={event => setMaintenance(event.target.value)} />
           </Col>
           <Col>
-            Cleanliness: <br />
-            <Form.Range />
+            Amenities: {amenities >= 0 ? amenities + "/10" : "Rate Here"} <br />
+            <Form.Range min={0} max={10} onChange={event => setAmenities(event.target.value)} />
+          </Col>
+          <Col>
+            Conditions & Management: {conditions >= 0 ? conditions + "/10" : "Rate Here"} <br />
+            <Form.Range min={0} max={10} onChange={event => setConditions(event.target.value)} />
           </Col>
         </Row>
         <br />
