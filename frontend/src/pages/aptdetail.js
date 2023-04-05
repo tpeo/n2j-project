@@ -38,6 +38,10 @@ const AptDetail = () => {
 
   const [button, setButton] = useState(false);
 
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalBody, setModalBody] = useState("");
+  const [modalShow, setModalShow] = useState(false);
+
   const email = window.localStorage.getItem("username");
 
   const mystyle = {
@@ -61,6 +65,8 @@ const AptDetail = () => {
           setApt(data);
         });
     fetchApt();
+    apt["reviews"] && setNumReviews(apt["reviews"].length);
+    apt["reviews"] && setAvgScore();
   }, [aptid]);
 
   useEffect(() => {
@@ -91,8 +97,34 @@ const AptDetail = () => {
     console.log(review);
   }, [review]);
 
+  const handleSubmit = () => {
+    console.log("submit");
+    if (review === "") {
+      setModalTitle("NOT");
+      setModalBody("Please enter a review.");
+    } else if (title === "") {
+      setModalTitle("NOT");
+      setModalBody("Please enter a title.");
+    }
+    else if (floorplan === "") {
+      setModalTitle("NOT");
+      setModalBody("Please select your floor plan.");
+    }
+    else if (cleanliness === -1 || maintenance === -1 || amenities === -1 || conditions === -1) {
+      setModalTitle("NOT");
+      setModalBody("Please select a rating for each category.");
+    }
+    else {
+      setButton(true);
+    }
+    setModalShow(true);
+  }
+
   const handleClose = () => {
+    setModalTitle("");
+    setModalBody("To see the comment, reload the page.");
     setButton(false);
+    setModalShow(false);
   };
 
   return (
@@ -171,7 +203,11 @@ const AptDetail = () => {
       {email ? (
         <div>
           <h2>Reviews </h2>
-          <p>{numReviews} verified reviews</p>
+          <p>{apt["reviews"] && apt["reviews"].length} verified reviews</p>
+          <p>Average Rating: {apt["reviews"] && parseFloat(apt["reviews"].reduce(
+              (v, review) => (v = v + parseInt(review["cleanliness"], 10) + parseInt(review["maintenance"], 10) 
+              + parseInt(review["amenities"], 10) + parseInt(review["conditions"], 10)) , 0)
+              / (4 * apt["reviews"].length).toFixed(1))}</p>
           {apt["reviews"] ? (
             apt["reviews"].map((review) => {
               return (
@@ -277,6 +313,7 @@ const AptDetail = () => {
                     onChange={(e) => setFloorplan(e.target.value)}
                     aria-label="Floor Plan Selector"
                   >
+                    <option value="">Select Floor Plan</option>
                     {apt["floor_plans"] &&
                       apt["floor_plans"].map((fp) => (
                         <option value={fp["name"]}>{fp["name"]}</option>
@@ -333,9 +370,9 @@ const AptDetail = () => {
               <br />
               <Button
                 type="button"
-                onClick={() => {
-                  setButton(!button);
-                }}
+                onClick={
+                  handleSubmit
+                }
               >
                 Submit
               </Button>
@@ -348,11 +385,11 @@ const AptDetail = () => {
       <br />
       <h2>Notes</h2>
       <p>Costs are per month, not including fees.</p>
-      <Modal show={button} onHide={handleClose}>
+      <Modal show={modalShow} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Comment submitted!</Modal.Title>
+          <Modal.Title>Comment {modalTitle} submitted!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>To see the comment, reload the page.</Modal.Body>
+        <Modal.Body>{modalBody}</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
             Close
