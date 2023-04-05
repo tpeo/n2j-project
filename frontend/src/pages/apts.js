@@ -48,7 +48,7 @@ const Apts = () => {
 
   return (
     <div class="aptlist">
-      <h1>Apartments</h1>
+      <h1>Home</h1>
       <Form>
         <Row>
           <Col>

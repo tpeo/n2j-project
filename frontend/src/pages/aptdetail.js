@@ -16,7 +16,12 @@ const AptDetail = () => {
 
   const email = window.localStorage.getItem("username");
 
-  const mystyle = { background: "#E0E9EF" };
+  const mystyle = {
+    background: "#E0E9EF",
+    width: "160px",
+    height: "160px",
+    border: "none",
+  };
 
   useEffect(() => {
     const fetchApt = async () =>
@@ -86,7 +91,7 @@ const AptDetail = () => {
       <br />
       <h2>Amenities</h2>
       <div class="aptgrid">
-        <Row xs={1} md={6} className="g-4">
+        {/* <Row xs={1} md={6} className="g-4">
           {apt["amenities"] &&
             apt["amenities"].map((amenity) => (
               <div>
@@ -94,25 +99,67 @@ const AptDetail = () => {
                 <Col>
                   <Card style={mystyle}>
                     <Card.Body>
-                      <Card.Title>{amenity}</Card.Title>
+                      <Card.Title>
+                        <div class="amenities">{amenity}</div>
+                      </Card.Title>
                       <Card.Text></Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
               </div>
             ))}
-        </Row>
+        </Row> */}
+        {apt["amenities"] &&
+          apt["amenities"].map((amenity) => (
+            <div class="items">
+              <br />
+              <Card style={mystyle}>
+                <Card.Body>
+                  <Card.Title>
+                    <div class="amenities">
+                      <p class="amenitstyle">{amenity}</p>
+                    </div>
+                  </Card.Title>
+                  <Card.Text></Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
       </div>
       <br />
       <h2>Additional Fees</h2>
       <br />
-      <Row xs={1} md={6} className="g-4">
+      <div class="aptgrid">
+        {apt["fees"] &&
+          apt["fees"].map((fee) => (
+            <div class="items">
+              <br />
+              <Card class="aptcard" style={mystyle}>
+                <Card.Body>
+                  <Card.Title>
+                    <div class="additfees">
+                      <b>{fee["name"]}</b>
+                    </div>
+                  </Card.Title>
+                  <Card.Text>
+                    <div class="additfees">Interval: {fee["interval"]}</div>
+                    <br />
+                    <h2>
+                      <b>${fee["amount"]}</b>
+                    </h2>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+      </div>
+      {/* <Row xs={1} md={6} className="g-4">
         {apt["fees"] &&
           apt["fees"].map((fee) => (
             <div>
               <br />
               <Col>
-                <Card class="aptcard">
+                <Card class="aptcard" style={mystyle}>
                   <Card.Body>
                     <Card.Title>{fee["name"]}</Card.Title>
                     <Card.Text>
@@ -125,7 +172,7 @@ const AptDetail = () => {
               </Col>
             </div>
           ))}
-      </Row>
+      </Row> */}
       <br />
       <h2>Add Your Review</h2>
       {email ? (
