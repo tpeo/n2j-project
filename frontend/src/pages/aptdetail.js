@@ -10,7 +10,15 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
-import { Grid } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Divider,
+  Typography,
+} from "@mui/material";
 import "./aptdetail.css";
 
 const AptDetail = () => {
@@ -19,6 +27,8 @@ const AptDetail = () => {
   const [apt, setApt] = useState([]);
 
   const [review, setReview] = useState("");
+  const [numReviews, setNumReviews] = useState(0);
+  const [avgScore, setAvgScore] = useState(0);
   const [floorplan, setFloorplan] = useState("");
   const [title, setTitle] = useState("");
   const [cleanliness, setCleanliness] = useState(-1);
@@ -52,22 +62,6 @@ const AptDetail = () => {
         });
     fetchApt();
   }, [aptid]);
-
-  useEffect(() => {
-    const postReview = async () =>
-      await fetch("http://localhost:4000/add-review", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          apt_id: aptid,
-          comment: review,
-        }),
-      }).then((response) => response.json());
-    //.then(() => setReview(""));
-    console.log("Effect triggered");
-    postReview();
-  }, [button]);
 
   useEffect(() => {
     const dateTime = Date.now();
@@ -129,24 +123,6 @@ const AptDetail = () => {
       <br />
       <h2>Amenities</h2>
       <div class="aptgrid">
-        {/* <Row xs={1} md={6} className="g-4">
-          {apt["amenities"] &&
-            apt["amenities"].map((amenity) => (
-              <div>
-                <br />
-                <Col>
-                  <Card style={mystyle}>
-                    <Card.Body>
-                      <Card.Title>
-                        <div class="amenities">{amenity}</div>
-                      </Card.Title>
-                      <Card.Text></Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </div>
-            ))}
-        </Row> */}
         {apt["amenities"] &&
           apt["amenities"].map((amenity) => (
             <div class="items">
@@ -191,26 +167,90 @@ const AptDetail = () => {
             </div>
           ))}
       </div>
-      {/* <Row xs={1} md={6} className="g-4">
-        {apt["fees"] &&
-          apt["fees"].map((fee) => (
-            <div>
-              <br />
-              <Col>
-                <Card class="aptcard" style={mystyle}>
-                  <Card.Body>
-                    <Card.Title>{fee["name"]}</Card.Title>
-                    <Card.Text>
-                      Interval: {fee["interval"]}
-                      <br />
-                      Amount: ${fee["amount"]}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </div>
-          ))}
-      </Row> */}
+      <br />
+      {email ? (
+        <div>
+          <h2>Reviews </h2>
+          <p>{numReviews} verified reviews</p>
+          {apt["reviews"] ? (
+            apt["reviews"].map((review) => {
+              return (
+                <div>
+                  <List
+                    sx={{
+                      width: "100%",
+                      bgcolor: "background.paper",
+                    }}
+                  >
+                    <ListItem alignItems="flex-start">
+                      <ListItemAvatar>
+                        <Avatar alt={review["name"]} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <Typography>
+                            <h4>{review["title"]}</h4>
+                            <p class="reviewname">{review["name"]}</p>
+                            <p class="reviewplan">{review["floorplan"]}</p>
+                          </Typography>
+                        }
+                        secondary={
+                          <Typography>
+                            <Row xs={1} md={4} className="g-4">
+                              <Col>
+                                <div classname="progressbar">Cleanliness</div>
+                                <ProgressBar
+                                  now={review["cleanliness"] * 10}
+                                  label={`${review["cleanliness"]}/10`}
+                                />
+                              </Col>
+                              <Col>
+                                <div classname="progressbar">Maintenance</div>
+                                <ProgressBar
+                                  now={review["maintenance"] * 10}
+                                  label={`${review["maintenance"]}/10`}
+                                />
+                              </Col>
+                              <Col>
+                                <div classname="progressbar">Amenities</div>
+                                <ProgressBar
+                                  now={review["amenities"] * 10}
+                                  label={`${review["amenities"]}/10`}
+                                />
+                              </Col>
+                              <Col>
+                                <div classname="progressbar">
+                                  Conditions & Management
+                                </div>
+                                <ProgressBar
+                                  now={review["conditions"] * 10}
+                                  label={`${review["conditions"]}/10`}
+                                />
+                              </Col>
+                            </Row>
+                            <br />
+                            <div class="reviewcontent">
+                              <p> {review["review"]} </p>
+                              <p>
+                                <i>{Date(review["timestamp"])}</i>
+                              </p>
+                            </div>
+                          </Typography>
+                        }
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                  </List>
+                </div>
+              );
+            })
+          ) : (
+            <p>No reviews yet.</p>
+          )}
+        </div>
+      ) : (
+        <p>Review not viewable before log in.</p>
+      )}
       <br />
       <h2>Add Your Review</h2>
       {email ? (
@@ -291,7 +331,12 @@ const AptDetail = () => {
                 rows={3}
               />
               <br />
-              <Button type="button" onClick={() => setButton(!button)}>
+              <Button
+                type="button"
+                onClick={() => {
+                  setButton(!button);
+                }}
+              >
                 Submit
               </Button>
             </Form.Group>
@@ -299,71 +344,6 @@ const AptDetail = () => {
         </div>
       ) : (
         <p>Log in to leave a review.</p>
-      )}
-      <br />
-      {email ? (
-        <div>
-          <h3>Reviews: </h3>
-          {apt["reviews"] ? (
-            apt["reviews"].map((review) => {
-              return (
-                <div>
-                  <Card>
-                    <Card.Header>
-                      For {review["floorplan"]}, made on{" "}
-                      {Date(review["timestamp"])}
-                    </Card.Header>
-
-                    <Card.Body>
-                      <Row xs={1} md={4} className="g-4">
-                        <Col>
-                          Cleanliness:
-                          <ProgressBar
-                            now={review["cleanliness"] * 10}
-                            label={`${review["cleanliness"]}/10`}
-                          />
-                        </Col>
-                        <Col>
-                          Maintenance:
-                          <ProgressBar
-                            now={review["maintenance"] * 10}
-                            label={`${review["maintenance"]}/10`}
-                          />
-                        </Col>
-                        <Col>
-                          Amenities:
-                          <ProgressBar
-                            now={review["amenities"] * 10}
-                            label={`${review["amenities"]}/10`}
-                          />
-                        </Col>
-                        <Col>
-                          Conditions & Management:
-                          <ProgressBar
-                            now={review["conditions"] * 10}
-                            label={`${review["conditions"]}/10`}
-                          />
-                        </Col>
-                      </Row>
-                      <br />
-                      <blockquote className="blockquote mb-0">
-                        <h4>{review["title"]}</h4>
-                        <p> {review["review"]} </p>
-                        <footer className="blockquote-footer">
-                          {review["name"]}
-                        </footer>
-                      </blockquote>
-                    </Card.Body>
-                  </Card>
-                </div>
-              );
-            })
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-        </div>
-      ) : (
-        <p>Review not viewable before log in.</p>
       )}
       <br />
       <h2>Notes</h2>

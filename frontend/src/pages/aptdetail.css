@@ -29,6 +29,10 @@
   font-stretch: normal;
 }
 
+body {
+  font-family: "neue-haas-grotesk-display";
+}
+
 h2 {
   font-family: "neue-haas-grotesk-display";
   font-style: normal;
@@ -43,6 +47,17 @@ h2 {
 .amenities {
   inline-size: 10px;
   overflow-wrap: break-word;
+  display: block;
+}
+
+.amenitstyle {
+  font-family: "ivypresto-display";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  color: #252525;
+  overflow-wrap: normal;
+  word-wrap: break-word;
 }
 
 .additfees {
@@ -60,10 +75,25 @@ h2 {
   padding-right: 10px;
 }
 
-.amenitstyle {
+h4 {
   font-family: "ivypresto-display";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
-  color: #252525;
+}
+
+.reviewname {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-family: "neue-haas-grotesk-display";
+}
+
+.reviewplan {
+  font-family: "neue-haas-grotesk-display";
+}
+
+.reviewcontent {
+  font-family: "neue-haas-grotesk-display";
+  font-size: 15px;
+}
+
+.progressbar {
+  font-family: "neue-haas-grotesk-display";
 }

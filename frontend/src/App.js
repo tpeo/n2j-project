@@ -18,22 +18,26 @@ import AuthContext, { useProvideAuth } from "./context/authentication.js";
 
 function App() {
   return (
-    <div class="everything">
-      <AuthContext.Provider value={useProvideAuth()}>
+    <div class="everything" style={{ display: "flex" }}>
+      <div style={{ flex: "1 auto", position: "fixed" }}>
         <Layout />
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<Apts />} />
-            <Route path="apts" element={<Apts />} />
-            <Route path="apts/:aptid" element={<AptDetail />} />
-            <Route path="newapt" element={<Newapt />} />
-            <Route path="myapts" element={<Myapts />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="logout" element={<Apts />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthContext.Provider>
+      </div>
+      <div class="mainpage">
+        <AuthContext.Provider value={useProvideAuth()}>
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<Apts />} />
+              <Route path="apts" element={<Apts />} />
+              <Route path="apts/:aptid" element={<AptDetail />} />
+              <Route path="newapt" element={<Newapt />} />
+              <Route path="myapts" element={<Myapts />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="logout" element={<Apts />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthContext.Provider>
+      </div>
     </div>
   );
 }
