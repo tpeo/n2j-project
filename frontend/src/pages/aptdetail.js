@@ -65,8 +65,6 @@ const AptDetail = () => {
           setApt(data);
         });
     fetchApt();
-    apt["reviews"] && setNumReviews(apt["reviews"].length);
-    apt["reviews"] && setAvgScore();
   }, [aptid]);
 
   useEffect(() => {
@@ -115,14 +113,15 @@ const AptDetail = () => {
       setModalBody("Please select a rating for each category.");
     }
     else {
+      setModalBody("To see the comment, reload the page.");
+      setModalTitle("");
       setButton(true);
     }
     setModalShow(true);
   }
 
   const handleClose = () => {
-    setModalTitle("");
-    setModalBody("To see the comment, reload the page.");
+    //setModalBody("To see the comment, reload the page.");
     setButton(false);
     setModalShow(false);
   };

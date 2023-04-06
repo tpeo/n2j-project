@@ -44,7 +44,10 @@ const Myapts = () => {
                         <Card.Title>{apt["name"]}</Card.Title>
                         <Card.Text>
                             Apartment ID: {apt["apt_id"]}<br />
-                            Rating: {apt["rating"]}<br />
+                            Rating: {apt["reviews"] && parseFloat(apt["reviews"].reduce(
+              (v, review) => (v = v + parseInt(review["cleanliness"], 10) + parseInt(review["maintenance"], 10) 
+              + parseInt(review["amenities"], 10) + parseInt(review["conditions"], 10)) , 0)
+              / (4 * apt["reviews"].length).toFixed(1))}<br />
                             Address: {apt["address"]}<br />
                         </Card.Text>
                         <Button href={"/apts/" + apt["apt_id"]}>See More</Button>

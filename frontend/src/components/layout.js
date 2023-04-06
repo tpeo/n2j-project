@@ -7,8 +7,6 @@ const Layout = () => {
 
   const auth = useContext(AuthContext);
 
-  console.log(auth);
-
   useEffect(() => {
     if (error) {
       window.alert(error);
@@ -16,12 +14,9 @@ const Layout = () => {
   }, [error]);
 
   const handleLogout = async (event) => {
+    console.log(AuthContext);
     event.preventDefault();
-    if (auth.loggedIn) {
-      auth.logout();
-    } else {
-      setError("Not logged in ---- button should not work.");
-    }
+    auth.logout();
   };
   const email = window.localStorage.getItem("username");
 
