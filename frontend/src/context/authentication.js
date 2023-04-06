@@ -71,7 +71,7 @@ export function useProvideAuth() {
       });
     };
   
-    const logout = () => {
+    function logout() {
       window.localStorage.clear();
       setLoggedIn(false);
     }
