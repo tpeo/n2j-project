@@ -7,6 +7,7 @@ import {
   Form,
   Modal,
   ProgressBar,
+  Image,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
@@ -128,6 +129,7 @@ const AptDetail = () => {
 
   return (
     <div class="aptlist">
+      {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
       <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
       <h2>Floor Plans</h2>
       <Row xs={1} md={3} className="g-4">
@@ -383,7 +385,14 @@ const AptDetail = () => {
       )}
       <br />
       <h2>Notes</h2>
-      <p>Costs are per month, not including fees.</p>
+      <p>
+        Costs are per month, not including fees.
+        <br />
+        <br />
+        We are not affiliated with any of the apartments listed on this site. While we make our best effort to keep information
+        up-to-date, we are not able to guarantee the accuracy of the information provided. Please contact the apartment directly
+        for more information.
+      </p>
       <Modal show={modalShow} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Comment {modalTitle} submitted!</Modal.Title>

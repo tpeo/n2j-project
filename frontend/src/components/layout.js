@@ -31,7 +31,7 @@ const Layout = () => {
       <nav class="navbar">
         <ul class="navbar-nav">
           <li class="logo">
-            <a href="/apts" class="nav-link"></a>
+            <a href="/user" class="nav-link">User</a>
           </li>
           <li class="nav-item">
             <a href="/apts" class="nav-link">

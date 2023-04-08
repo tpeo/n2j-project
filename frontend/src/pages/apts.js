@@ -81,6 +81,8 @@ const Apts = () => {
               <Col>
                 <Card>
                   <Card.Body>
+                    <Card.Img variant="top" src={apt["aptimage"]}/>
+                    <br />
                     <Card.Title>{apt["name"]}</Card.Title>
                     <Card.Text>
                       Apartment ID: {apt["apt_id"]}
