@@ -82,6 +82,22 @@ app.post("/get-user", async (req, res) => {
   }
 });
 
+app.post("/add-user-apt", async (req, res) => {
+  try {
+    const { email, aptid } = req.body;
+    const snapshot = await firebase.db.collection("users").doc(email);
+    const userinfo = await snapshot.get();
+    snapshot.update({
+      apts: FieldValue.arrayUnion(aptid),
+    });
+    res.status(200).send({ message: "Apartment added successfully" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Apartment Addition Unsucessful"});
+  }
+});
+
 app.post("/add-review", async (req, res) => {
   try {
     const {
