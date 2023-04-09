@@ -49,7 +49,7 @@ const UserInfo = () => {
     return (
     <div class="aptlist">
         <h1>My Apartments</h1>
-        {!user ? <p><br />To use "My Apartments, log in first.</p> : 
+        {user &&
         <div>
             <Card>
             <Card.Header>Welcome!</Card.Header>

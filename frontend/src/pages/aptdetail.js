@@ -201,6 +201,20 @@ const AptDetail = () => {
           ))}
       </div>
       <br />
+      <h2>Map</h2>
+      {apt["mapembed"] && 
+      <div>
+        <iframe
+          src={apt["mapembed"]}
+          width="70%"
+          height="450"
+          style={{ "text-align" : "center"}}
+          allowfullscreen=""
+          loading="lazy"
+          title="map"
+        ></iframe>
+      </div>}
+      <br />
       {email ? (
         <div>
           <h2>Reviews </h2>
