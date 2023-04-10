@@ -15,7 +15,7 @@ const Myapts = () => {
 
   useEffect(() => {
     const fetchApts = async () =>
-      await fetch("http://localhost:4000/get-apts", {
+      await fetch("https://n2j-project-backend.vercel.app/get-apts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -56,7 +56,7 @@ const Myapts = () => {
   console.log(email);
 
   const fetchApts = async () =>
-    await fetch("http://localhost:4000/get-user-apts", {
+    await fetch("https://n2j-project-backend.vercel.app/get-user-apts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
