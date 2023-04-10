@@ -128,8 +128,10 @@ const AptDetail = () => {
   };
 
   return (
-    <div class="aptlist">
-      {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
+    <div style={{ margin: 'var(--navbar)' }}> 
+      <div class = "image">
+          {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
+        </div>
       <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
       <h2>Floor Plans</h2>
       <Row xs={1} md={3} className="g-4">

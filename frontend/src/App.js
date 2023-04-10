@@ -21,10 +21,12 @@ function App() {
   return (
     <div>
       <AuthContext.Provider value={useProvideAuth()}>
-      <div class="everything" style={{ display: "flex" }}>
+      {/* <div class="everything" style={{ display: "flex" }}>
         <div style={{ flex: "1 auto", position: "fixed" }}>
           <Layout />
-        </div>
+        </div> */}
+        <div>
+          <Layout/>
         <div class="mainpage">
           
             <BrowserRouter>

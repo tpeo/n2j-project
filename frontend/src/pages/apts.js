@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import "./apts.css";
+import {IconButton, TextField} from "@mui/material";
+import {Search} from "@mui/icons-material";
 
 const Apts = () => {
   const [apts, setApts] = useState([]);
@@ -46,13 +49,15 @@ const Apts = () => {
     };
   }, []);
 
+  const navbar = window.localStorage.getItem("navbar");
+
   return (
-    <div class="aptlist">
+    <div class="aptlist" >
       <h1>Home</h1>
       <Form>
         <Row>
           <Col>
-            <Form.Label>Search for Apartments</Form.Label>
+            <Form.Label class = "content">Search for Apartments</Form.Label>
           </Col>
         </Row>
         <Row>
@@ -73,6 +78,7 @@ const Apts = () => {
           </Col>
         </Row>
       </Form>
+      <div class = "aptcards">
       <Row xs={1} md={2} className="g-4">
         {apts &&
           apts.map((apt) => (
@@ -81,10 +87,10 @@ const Apts = () => {
               <Col>
                 <Card>
                   <Card.Body>
-                    <Card.Img variant="top" src={apt["aptimage"]}/>
+                    <Card.Img variant="top" src={apt["aptimage"]} class = "images"/>
                     <br />
-                    <Card.Title>{apt["name"]}</Card.Title>
-                    <Card.Text>
+                    <Card.Title class = "aptname">{apt["name"]}</Card.Title>
+                    <Card.Text class = "content">
                       Apartment ID: {apt["apt_id"]}
                       <br />
                       Rating: {apt["reviews"] && parseFloat(apt["reviews"].reduce(
@@ -92,7 +98,7 @@ const Apts = () => {
               + parseInt(review["amenities"], 10) + parseInt(review["conditions"], 10)) , 0)
               / (4 * apt["reviews"].length).toFixed(1))}
                       <br />
-                      Address: {apt["address"]}
+                      {apt["address"]}
                       <br />
                     </Card.Text>
                     <Button href={"/apts/" + apt["apt_id"]}>See More</Button>
@@ -102,6 +108,7 @@ const Apts = () => {
             </div>
           ))}
       </Row>
+      </div>
     </div>
   );
 };

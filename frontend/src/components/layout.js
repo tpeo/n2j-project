@@ -1,11 +1,37 @@
 import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/authentication.js";
 import "./Navbar.css";
+import {
+  GridView,
+  BookmarkBorder,
+  Logout,
+  Login,
+  SignLanguage,
+  Menu,
+  Close,
+  AccountCircle
+} from "@mui/icons-material";
 
 const Layout = () => {
   const [error, setError] = useState("");
 
   const auth = useContext(AuthContext);
+
+  const [sidebar, setSidebar] = useState(false);
+  const [navbar, setNavbar] = useState('--navbar-close');
+
+  useEffect(() => {
+    if (sidebar) {
+      setNavbar('--navbar-close');
+    } else {
+      setNavbar('--navbar-open');
+    }
+    console.log(navbar);
+  }, [sidebar]);
+
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
   console.log(auth);
 
@@ -27,6 +53,7 @@ const Layout = () => {
   const email = window.localStorage.getItem("username");
 
   return (
+    /*
     <div>
       <nav class="navbar">
         <ul class="navbar-nav">
@@ -290,6 +317,66 @@ const Layout = () => {
         </ul>
       </nav>
     </div>
+    */
+       <>
+      <div className="navbar" style={{ '--navbar': `var(${navbar})` }}>
+        <a href="/#" className="menu-bars">
+          <Menu onClick={showSidebar} />
+        </a>
+      </div>
+      <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+        <ul className="nav-menu-items" onClick={showSidebar}>
+          <li className="navbar-toggle">
+            <a href="#" className="menu-bars">
+              <Close />
+            </a>
+          </li>
+          <li className="nav-text">
+            <a href="/apts">
+              <GridView />
+              <span>All Apartments</span>
+            </a>
+          </li>
+          <li className="nav-text">
+            <a href="/myapts">
+              <BookmarkBorder />
+              <span>My Apartments</span>
+            </a>
+          </li>
+          {email ? (
+            <div>
+              <li className="nav-text">
+                <a href="/user">
+                  <AccountCircle />
+                  <span>User</span>
+                </a>
+              </li>
+              <li className="nav-text">
+                <a href="/apts" onClick={handleLogout}>
+                  <Logout />
+                  <span>Log out</span>
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div>
+              <li className="nav-text">
+                <a href="/login">
+                  <Login />
+                  <span>Log in</span>
+                </a>
+              </li>
+              <li className="nav-text">
+                <a href="/signup">
+                  <SignLanguage />
+                  <span>Sign up</span>
+                </a>
+              </li>
+            </div>
+          )}
+        </ul>
+      </nav>
+    </>
   );
 };
 
