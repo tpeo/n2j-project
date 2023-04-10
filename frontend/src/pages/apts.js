@@ -60,24 +60,18 @@ const Apts = () => {
             <Form>
               <Row>
                 <Col>
-                  <Form.Label class="content">Search for Apartments</Form.Label>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Control
-                    onChange={(event) => setName(event.target.value)}
-                    placeholder="Enter name"
-                  />{" "}
-                </Col>
-                <Col>
-                  <Button
-                    variant="primary"
-                    type="button"
-                    onClick={() => setButton(!button)}
-                  >
-                    Search
-                  </Button>
+                  <div class="searchbar">
+                    <div class="searchicon">
+                      <Search onClick={() => setButton(!button)} />
+                    </div>
+                    <div>
+                      <Form.Control
+                        onChange={(event) => setName(event.target.value)}
+                        placeholder="Search by name"
+                        style={{ width: "300px", border: "none" }}
+                      />
+                    </div>
+                  </div>
                 </Col>
               </Row>
             </Form>

@@ -119,11 +119,12 @@ main {
 } */
 
 .navbar {
-  background-color: #a7c4dc73;
+  background-color: rgb(214, 229, 242);
   height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
+  z-index: 500;
 }
 
 .menu-bars {
