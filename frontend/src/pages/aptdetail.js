@@ -162,17 +162,33 @@ const AptDetail = () => {
               <div>
                 <br />
                 <Col>
-                  <Card>
+                  <Card style={{ background: "#E0E9EF", border: "none" }}>
                     <Card.Body>
-                      <Card.Title>{fp["name"]}</Card.Title>
-                      <Card.Text>
+                      <Image
+                        style={{
+                          width: "300px",
+                          height: "300px",
+                        }}
+                        src={apt["floorplanimg"]}
+                      />
+                      {/* <Card.Title>
+                        <h4>{fp["name"]}</h4>
+                      </Card.Title> */}
+                      {/* <Card.Text>
                         Cost*: {fp["cost"]}
                         <br />
                         {fp["br"]} BR | {fp["ba"]} BA <br />
                         Per-room: {fp["is_double"] ? "DOUBLE" : "SINGLE"}
-                      </Card.Text>
+                      </Card.Text> */}
                     </Card.Body>
                   </Card>
+                  <h4>{fp["name"]}</h4>
+                  <p>
+                    Cost*: {fp["cost"]}
+                    <br />
+                    {fp["br"]} BR | {fp["ba"]} BA <br />
+                    Per-room: {fp["is_double"] ? "DOUBLE" : "SINGLE"}
+                  </p>
                 </Col>
               </div>
             ))}
