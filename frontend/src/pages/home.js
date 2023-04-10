@@ -1,10 +1,11 @@
 import React from "react";
 import {Button, Card} from 'react-bootstrap';
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Home = () => {
   return (
-    <div class="scroll">
+    <div class="aptlist">
       <h1>Home</h1>
       <Button>click here</Button>
       <Card>

@@ -1,58 +1,60 @@
 const firebase = require("./firebase.js");
+const { FieldValue } = require("firebase-admin/firestore");
 require("dotenv").config();
 
 const express = require("express");
 const app = express();
-var cors = require('cors');
+var cors = require("cors");
 
 app.use(express.json());
-app.use(
-  cors({origin: '*'})
-)
-app.post('/add-apt', async (req, res) => {
+app.use(cors({ origin: "*" }));
+app.post("/add-apt", async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const { name, apt_id, rating } = req.body; // Assuming request body contains 'name' and 'description' fields
-    
+
     // Add new entry to Firestore collection
     // Apartment ID will be used to identify it in the database
-    const entryRef = await firebase.db.collection('houses').doc(apt_id + "").set({
-      name,
-      apt_id,
-      rating
-    });
+    const entryRef = await firebase.db
+      .collection("houses")
+      .doc(apt_id + "")
+      .set({
+        name,
+        apt_id,
+        rating,
+      });
 
-    res.status(200).send({ message: 'Entry added successfully', id: entryRef.id });
+    res
+      .status(200)
+      .send({ message: "Entry added successfully", id: entryRef.id });
   } catch (error) {
-    console.error('Error adding entry:', error);
-    res.status(500).send({ error: 'Error adding entry' });
+    console.error("Error adding entry:", error);
+    res.status(500).send({ error: "Error adding entry" });
   }
 });
 
-app.post('/get-apt', async (req, res) => {
+app.post("/get-apt", async (req, res) => {
   try {
     console.log(req.body);
-    const {apt_id} = req.body;
-    const entryRef = await firebase.db.collection('houses').doc(apt_id+"");
+    const { apt_id } = req.body;
+    const entryRef = await firebase.db.collection("houses").doc(apt_id + "");
     const doc = await entryRef.get();
     if (doc.exists) {
       res.status(200).send(doc.data());
+    } else {
+      res.status(200).send({ error: "No such apartment" });
     }
-    else {
-      res.status(200).send({ error: "No such apartment"});
-    }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
-    res.status(500).send({ error: "Can't retrieve this apartment"});
+    res.status(500).send({ error: "Can't retrieve this apartment" });
   }
-})
+});
 
-app.post('/get-apts', async(req, res)=> {
+app.post("/get-apts", async (req, res) => {
   try {
-    const {name} = req.body;
-    const snapshot = await firebase.db.collection('houses').get();
-    const aptlist = snapshot.docs.map(doc => doc.data());
+    const { name } = req.body;
+    const snapshot = await firebase.db.collection("houses").get();
+    const aptlist = snapshot.docs.map((doc) => doc.data());
     console.log(aptlist);
     console.log(name);
     apts = [];
@@ -63,47 +65,109 @@ app.post('/get-apts', async(req, res)=> {
     }
     console.log(apts);
     res.status(200).send(apts);
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
     res.status(500).send("Can't retrieve Apartment ID list");
   }
-})
+});
 
-app.post('/get-user', async(req, res)=> {
+app.post("/get-user", async (req, res) => {
   try {
-    const {email} = req.body;
-    const snapshot = await firebase.db.collection('users').get(email);
-    res.status(200).send(snapshot.docs.map(doc => doc.data()));
-  }
-  catch (error) {
+    const { email } = req.body;
+    const snapshot = await firebase.db.collection("users").get(email);
+    res.status(200).send(snapshot.docs.map((doc) => doc.data()));
+  } catch (error) {
     console.error(error);
     res.status(500).send("Can't retrieve Apartment ID list");
   }
-})
+});
 
-app.post('/get-user-apts', async(req, res)=> {
+app.post("/add-user-apt", async (req, res) => {
   try {
-    const {email} = req.body;
-    const aptids = await firebase.db.collection('users').get(email);
-    const houses = await firebase.db.collection('houses').get();
-    const aptidlist = aptids.docs.map(doc => doc.data());
-    const houselist = houses.docs.map(doc => doc.data());
+    const { email, aptid } = req.body;
+    const snapshot = await firebase.db.collection("users").doc(email);
+    const userinfo = await snapshot.get();
+    snapshot.update({
+      apts: FieldValue.arrayUnion(aptid),
+    });
+    res.status(200).send({ message: "Apartment added successfully" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Apartment Addition Unsucessful"});
+  }
+});
+
+app.post("/add-review", async (req, res) => {
+  try {
+    const {
+      email,
+      apt_id,
+      comment,
+      title,
+      floorplan,
+      cleanliness,
+      maintenance,
+      amenities,
+      conditions,
+      timestamp,
+    } = req.body;
+    const snapshot = await firebase.db.collection("users").doc(email);
+    const userinfo = await snapshot.get();
+    const entryRef = await firebase.db.collection("houses").doc(apt_id + "");
+    if (comment !== "") {
+      entryRef.update({
+        reviews: FieldValue.arrayUnion({
+          name: userinfo.data()["name"],
+          review: comment,
+          title: title,
+          floorplan: floorplan,
+          cleanliness: cleanliness,
+          maintenance: maintenance,
+          amenities: amenities,
+          conditions: conditions,
+          timestamp: timestamp,
+        }),
+      });
+      res.status(200).send({ message: "Review added successfully" });
+    } else res.status(200).send({ message: "Review must not be empty" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Error posting comment" });
+  }
+});
+
+app.post("/get-user-apts", async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (email === null) {
+      res.status(200).send([]);
+      return;
+    }
+    console.log(email);
+    const aptids = await firebase.db.collection("users").doc(email).get();
+    const houses = await firebase.db.collection("houses").get();
+    const aptidlist = aptids.data();
+    const houselist = houses.docs.map((doc) => doc.data());
+    console.log(aptidlist);
+    console.log(houselist);
     var apts = [];
-    for (aptid in aptidlist[0]["apts"]) {
+    for (aptid in aptidlist["apts"]) {
       for (house in houselist) {
-        if (parseInt(aptidlist[0]["apts"][aptid]) === parseInt(houselist[house]["apt_id"])) {
+        if (
+          parseInt(aptidlist["apts"][aptid]) ===
+          parseInt(houselist[house]["apt_id"])
+        ) {
           apts.push(houselist[house]);
         }
       }
     }
     res.status(200).send(apts);
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
     res.status(500).send("Can't retrieve Apartment ID list");
   }
-})
+});
 
 app.listen(4000, () => {
   console.log("Server running on port 4000");

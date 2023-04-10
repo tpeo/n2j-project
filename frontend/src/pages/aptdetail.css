@@ -1,0 +1,156 @@
+@import url(//fonts.googleapis.com/css?family=Raleway);
+@import url(//fonts.googleapis.com/css?family=Playfair+Display);
+
+@font-face {
+  font-family: "ivypresto-display";
+  src: url("https://use.typekit.net/af/343df8/00000000000000007735e5b3/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/343df8/00000000000000007735e5b3/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/343df8/00000000000000007735e5b3/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "neue-haas-grotesk-display";
+  src: url("https://use.typekit.net/af/2807c7/00000000000000007735bb48/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/2807c7/00000000000000007735bb48/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/2807c7/00000000000000007735bb48/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+body {
+  font-family: "neue-haas-grotesk-display";
+}
+
+h2 {
+  font-family: "neue-haas-grotesk-display";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 30px;
+  line-height: 97.3%;
+  /* or 29px */
+
+  color: #2d2d2d;
+}
+
+.letter {
+  position: absolute;
+  bottom: 150px;
+  left: 70px;
+  backdrop-filter: blur(8px);
+}
+
+.aptitle {
+  font-family: "ivypresto-display";
+  font-size: 70px;
+  color: white;
+}
+
+.apaddress {
+  font-family: "neue-haas-grotesk-display";
+  font-size: 30px;
+  color: white;
+}
+
+.amenities {
+  inline-size: 140px;
+  overflow-wrap: break-word;
+  display: block;
+}
+
+.amenitstyle {
+  font-family: "ivypresto-display";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  color: #252525;
+  inline-size: 140px;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.aptlist {
+  margin: 2% 7% 2% 5%;
+}
+
+.additfees {
+  font-family: "neue-haas-grotesk-display";
+  inline-size: 140px;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.aptgrid {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.items {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h4 {
+  font-family: "ivypresto-display";
+}
+
+.reviewname {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-family: "neue-haas-grotesk-display";
+}
+
+.reviewplan {
+  font-family: "neue-haas-grotesk-display";
+}
+
+.reviewcontent {
+  font-family: "neue-haas-grotesk-display";
+  font-size: 15px;
+}
+
+.progressbar {
+  font-family: "neue-haas-grotesk-display";
+}
+
+.avgrating {
+  font-family: "ivypresto-display";
+}
+
+.numreviews {
+  font-family: "neue-haas-grotesk-display";
+  font-size: 20px;
+}
+
+.avgbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.ratingbars {
+  width: 300px;
+}
+
+.vl {
+  border-left: 1px solid rgb(200, 200, 200);
+  height: 150px;
+}
+
+.hl {
+  border-top: 1px solid rgb(200, 200, 200);
+}

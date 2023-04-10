@@ -1,0 +1,113 @@
+@font-face {
+  font-family: "ivypresto-display";
+  src: url("https://use.typekit.net/af/343df8/00000000000000007735e5b3/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/343df8/00000000000000007735e5b3/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/343df8/00000000000000007735e5b3/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "neue-haas-grotesk-display";
+  src: url("https://use.typekit.net/af/2807c7/00000000000000007735bb48/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/2807c7/00000000000000007735bb48/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/2807c7/00000000000000007735bb48/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+.aptcards {
+  width: 600px;
+}
+
+.images {
+  width: 100%;
+  height: 12vw;
+  object-fit: cover;
+}
+
+.aptname {
+  font-family: "ivypresto-display";
+  font-size: 40px;
+}
+
+.content {
+  font-family: "neue-haas-grotesk-display";
+}
+
+a:link {
+  text-decoration: none;
+  color: #2d2d2d;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #2d2d2d;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #2d2d2d;
+}
+
+a:active {
+  text-decoration: none;
+  color: #2d2d2d;
+}
+
+h1 {
+  font-family: "neue-haas-grotesk-display";
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgb(197, 196, 196);
+  border-radius: 10px;
+  width: 500px;
+}
+
+.searchicon {
+  margin-left: 10px;
+  color: #f2c87d;
+}
+
+.placeholder {
+  font-family: "neue-haas-grotesk-display";
+}
+
+iframe {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.left,
+.right {
+  height: 100vh;
+  width: 100%;
+}
+
+.aptlist {
+  margin: 2% 7% 2% 3%;
+  /*--navbar-close: 2% 10%; */
+}
+
+@media screen and (min-width: 768px) {
+  .left,
+  .right {
+    height: 100vh;
+  }
+}

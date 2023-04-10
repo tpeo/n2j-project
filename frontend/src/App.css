@@ -37,6 +37,22 @@
   }
 }
 
-.aptlist{
-  margin: 2% 10%;
+/* .aptlist {
+  margin: 2% 7% 2% 3%;
+} */
+
+.aptgrid {
+  display: flex;
+  align-items: stretch;
+}
+
+.aptcard {
+  background-color: #88b4d9 !important;
+  border-radius: 3px;
+}
+
+.alignbox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

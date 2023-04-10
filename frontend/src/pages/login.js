@@ -1,9 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/authentication.js";
-import { Button, TextField } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  Typography,
+  Avatar,
+} from "@mui/material";
+import { Image } from "react-bootstrap";
+import { CelebrationTwoTone } from "@mui/icons-material";
+import "./login.css";
 //import TextField from '@mui/material/TextField';
-
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -25,7 +34,7 @@ function Login() {
 
   useEffect(() => {
     if (auth.loggedIn) {
-      navigate("/");
+      navigate("/apts");
     }
   }, []);
 
@@ -43,7 +52,7 @@ function Login() {
     } else {
       try {
         await auth.loginUser(formData.email, formData.password);
-        navigate("/");
+        navigate("/apts");
         setErrorMessage("");
       } catch (error) {
         setErrorMessage(error);
@@ -51,27 +60,89 @@ function Login() {
     }
   };
 
-    const handleChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
-    };
-    
-    return (
-        <div className="login">
-            <form>
-                <h1>Email: </h1> 
-                <TextField id="email" label="Email" variant="outlined" type="text" name="email" onChange={handleChange} />
-                <h1>Password:</h1>
-                <TextField id="password" label="Password" variant="outlined" type="password" name="password" onChange={handleChange} />
-                <br />
-                <Button variant="contained" onClick={handleLogin}>Login</Button>
-            </form>
-        </div>
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    );
-
+  return (
+    <div class="aptlist">
+      <form class="card">
+        <Card sx={{ maxWidth: 345 }} class="inner">
+          <CardContent>
+            <div class="right">
+              <div class="user">
+                <Avatar
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    background: "#5ea0d6",
+                  }}
+                >
+                  <CelebrationTwoTone
+                    style={{ width: "60px", height: "60px" }}
+                  />
+                </Avatar>
+              </div>
+              <div class="loginletter">
+                <Typography variant="h3" component="div">
+                  Login
+                </Typography>
+              </div>
+              <div class="caption">
+                <Typography>
+                  Start your journey with us! We are happy to welcome you back.
+                  Noot is a housing app developed by ut students aiming to make
+                  finding housing easier for current/prospective ut students.
+                </Typography>
+              </div>
+              <div class="loginelement">
+                <TextField
+                  id="email"
+                  label="Email"
+                  variant="outlined"
+                  type="text"
+                  name="email"
+                  onChange={handleChange}
+                  style={{ width: "500px" }}
+                />
+              </div>
+              <div class="loginelement">
+                <TextField
+                  id="password"
+                  label="Password"
+                  variant="outlined"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  style={{ width: "500px" }}
+                />
+              </div>
+              <div class="loginelement">
+                <Button
+                  variant="contained"
+                  onClick={handleLogin}
+                  style={{ width: "500px" }}
+                >
+                  Login
+                </Button>
+              </div>
+              <div class="loginelement">
+                <Typography>
+                  Don't have an account yet?{" "}
+                  <a href="/signup" style={{ color: "blue" }}>
+                    Join here
+                  </a>
+                </Typography>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </form>
+    </div>
+  );
 }
 
 export default Login;
