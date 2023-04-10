@@ -320,7 +320,7 @@ const Layout = () => {
     */
        <>
       <div className="navbar" style={{ '--navbar': `var(${navbar})` }}>
-        <a href="/#" className="menu-bars">
+        <a className="menu-bars">
           <Menu onClick={showSidebar} />
         </a>
       </div>

@@ -128,7 +128,7 @@ const AptDetail = () => {
   };
 
   return (
-    <div style={{ margin: 'var(--navbar)' }}> 
+    <div class="aptlist"> 
       <div class = "image">
           {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
         </div>
