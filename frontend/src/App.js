@@ -21,14 +21,13 @@ function App() {
   return (
     <div>
       <AuthContext.Provider value={useProvideAuth()}>
-      {/* <div class="everything" style={{ display: "flex" }}>
+        {/* <div class="everything" style={{ display: "flex" }}>
         <div style={{ flex: "1 auto", position: "fixed" }}>
           <Layout />
         </div> */}
         <div>
-          <Layout/>
-        <div class="mainpage">
-          
+          <Layout />
+          <div class="mainpage">
             <BrowserRouter>
               <Routes>
                 <Route index element={<Apts />} />
@@ -42,9 +41,8 @@ function App() {
                 <Route path="logout" element={<Apts />} />
               </Routes>
             </BrowserRouter>
-          
+          </div>
         </div>
-      </div>
       </AuthContext.Provider>
     </div>
   );

@@ -319,9 +319,13 @@ const Layout = () => {
     */
     <>
       <div className="navbar" style={{ "--navbar": `var(${navbar})` }}>
-        <a className="menu-bars">
-          {/* <Menu onClick={showSidebar} /> */}
-          <div onClick={showSidebar}>
+        <div className="menu-bars">
+          <div class="logo">
+            <Menu
+              style={{ width: "30px", height: "30px", color: "#5ea0d6" }}
+              onClick={showSidebar}
+              class="expand"
+            />
             <svg
               width="49"
               height="62"
@@ -374,8 +378,9 @@ const Layout = () => {
                 </clipPath>
               </defs>
             </svg>
+            <h1 class="brand">Nook</h1>
           </div>
-        </a>
+        </div>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showSidebar}>
