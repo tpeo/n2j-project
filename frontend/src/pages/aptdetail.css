@@ -101,3 +101,33 @@ h4 {
 .progressbar {
   font-family: "neue-haas-grotesk-display";
 }
+
+.avgrating {
+  font-family: "ivypresto-display";
+}
+
+.numreviews {
+  font-family: "neue-haas-grotesk-display";
+  font-size: 20px;
+}
+
+.avgbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.ratingbars {
+  width: 300px;
+}
+
+.vl {
+  border-left: 1px solid rgb(200, 200, 200);
+  height: 150px;
+}
+
+.hl {
+  border-top: 1px solid rgb(200, 200, 200);
+}

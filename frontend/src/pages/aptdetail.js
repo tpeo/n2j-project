@@ -104,22 +104,24 @@ const AptDetail = () => {
     } else if (title === "") {
       setModalTitle("NOT");
       setModalBody("Please enter a title.");
-    }
-    else if (floorplan === "") {
+    } else if (floorplan === "") {
       setModalTitle("NOT");
       setModalBody("Please select your floor plan.");
-    }
-    else if (cleanliness === -1 || maintenance === -1 || amenities === -1 || conditions === -1) {
+    } else if (
+      cleanliness === -1 ||
+      maintenance === -1 ||
+      amenities === -1 ||
+      conditions === -1
+    ) {
       setModalTitle("NOT");
       setModalBody("Please select a rating for each category.");
-    }
-    else {
+    } else {
       setModalBody("To see the comment, reload the page.");
       setModalTitle("");
       setButton(true);
     }
     setModalShow(true);
-  }
+  };
 
   const handleClose = () => {
     //setModalBody("To see the comment, reload the page.");
@@ -128,11 +130,27 @@ const AptDetail = () => {
   };
 
   return (
-    <div class="aptlist"> 
-      <div class = "image">
-          {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
-        </div>
+    <div class="aptlist">
+      <div class="image">
+        {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
+      </div>
       <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
+      <h2>Map</h2>
+      {apt["mapembed"] && (
+        <div>
+          <iframe
+            src={apt["mapembed"]}
+            width="70%"
+            height="450"
+            style={{ "text-align": "center" }}
+            allowfullscreen=""
+            loading="lazy"
+            title="map"
+          ></iframe>
+        </div>
+      )}
+      <br />
+      <br />
       <h2>Floor Plans</h2>
       <Row xs={1} md={3} className="g-4">
         {apt["floor_plans"] &&
@@ -203,28 +221,140 @@ const AptDetail = () => {
           ))}
       </div>
       <br />
-      <h2>Map</h2>
-      {apt["mapembed"] && 
-      <div>
-        <iframe
-          src={apt["mapembed"]}
-          width="70%"
-          height="450"
-          style={{ "text-align" : "center"}}
-          allowfullscreen=""
-          loading="lazy"
-          title="map"
-        ></iframe>
-      </div>}
       <br />
       {email ? (
         <div>
-          <h2>Reviews </h2>
-          <p>{apt["reviews"] && apt["reviews"].length} verified reviews</p>
-          <p>Average Rating: {apt["reviews"] && parseFloat(apt["reviews"].reduce(
-              (v, review) => (v = v + parseInt(review["cleanliness"], 10) + parseInt(review["maintenance"], 10) 
-              + parseInt(review["amenities"], 10) + parseInt(review["conditions"], 10)) , 0)
-              / (4 * apt["reviews"].length).toFixed(1))}</p>
+          <div class="avgbox">
+            <div>
+              <h2>Reviews </h2>
+              <h2 class="avgrating">
+                {apt["reviews"] &&
+                  parseFloat(
+                    apt["reviews"].reduce(
+                      (v, review) =>
+                        (v =
+                          v +
+                          parseInt(review["cleanliness"], 10) +
+                          parseInt(review["maintenance"], 10) +
+                          parseInt(review["amenities"], 10) +
+                          parseInt(review["conditions"], 10)),
+                      0
+                    ) / (4 * apt["reviews"].length).toFixed(1)
+                  )}{" "}
+                / 10
+              </h2>
+              <p class="numreviews">
+                {apt["reviews"] && apt["reviews"].length} verified reviews
+              </p>
+            </div>
+            <div class="vl"></div>
+            <div class="ratingbars">
+              <div class="ratingitems">
+                <p>Cleanliness</p>
+                <ProgressBar
+                  now={
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["cleanliness"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    ) * 10
+                  }
+                  label={`${
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["cleanliness"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    )
+                  }/10`}
+                />
+              </div>
+              <div class="ratingitems">
+                <p>Maintenance</p>
+                <ProgressBar
+                  now={
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["maintenance"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    ) * 10
+                  }
+                  label={`${
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["maintenance"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    )
+                  }/10`}
+                />
+              </div>
+            </div>
+            <div style={{ width: "300px" }}>
+              <div class="ratingitems">
+                <p>Amenities</p>
+                <ProgressBar
+                  now={
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["amenities"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    ) * 10
+                  }
+                  label={`${
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["amenities"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    )
+                  }/10`}
+                />
+              </div>
+              <div class="ratingitems">
+                <p>Conditions</p>
+                <ProgressBar
+                  now={
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["conditions"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    ) * 10
+                  }
+                  label={`${
+                    apt["reviews"] &&
+                    parseFloat(
+                      apt["reviews"].reduce(
+                        (v, review) =>
+                          (v = v + parseInt(review["conditions"], 10)),
+                        0
+                      ) / apt["reviews"].length.toFixed(1)
+                    )
+                  }/10`}
+                />
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="hl"></div>
           {apt["reviews"] ? (
             apt["reviews"].map((review) => {
               return (
@@ -385,12 +515,7 @@ const AptDetail = () => {
                 rows={3}
               />
               <br />
-              <Button
-                type="button"
-                onClick={
-                  handleSubmit
-                }
-              >
+              <Button type="button" onClick={handleSubmit}>
                 Submit
               </Button>
             </Form.Group>
@@ -405,9 +530,10 @@ const AptDetail = () => {
         Costs are per month, not including fees.
         <br />
         <br />
-        We are not affiliated with any of the apartments listed on this site. While we make our best effort to keep information
-        up-to-date, we are not able to guarantee the accuracy of the information provided. Please contact the apartment directly
-        for more information.
+        We are not affiliated with any of the apartments listed on this site.
+        While we make our best effort to keep information up-to-date, we are not
+        able to guarantee the accuracy of the information provided. Please
+        contact the apartment directly for more information.
       </p>
       <Modal show={modalShow} onHide={handleClose}>
         <Modal.Header closeButton>
