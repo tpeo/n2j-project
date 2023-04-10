@@ -155,8 +155,7 @@ const AptDetail = () => {
       </div>
       <div class="aptlist">
         <br />
-        <br />
-        <h2>Floor Plans</h2>
+        <h2>Sample Floor Plans</h2>
         <Row xs={1} md={3} className="g-4">
           {apt["floor_plans"] &&
             apt["floor_plans"].map((fp) => (
@@ -457,13 +456,14 @@ const AptDetail = () => {
                       placeholder="Give us a tldr :)"
                       as="textarea"
                       rows={1}
+                      style={{ width: "500px" }}
                     />
-                  </Col>
-                  <Col>
+                    <br />
                     <Form.Select
                       value={floorplan}
                       onChange={(e) => setFloorplan(e.target.value)}
                       aria-label="Floor Plan Selector"
+                      style={{ width: "500px" }}
                     >
                       <option value="">Select Floor Plan</option>
                       {apt["floor_plans"] &&
@@ -471,10 +471,15 @@ const AptDetail = () => {
                           <option value={fp["name"]}>{fp["name"]}</option>
                         ))}
                     </Form.Select>
+                    <br />
+                    <Form.Control
+                      onChange={(event) => setReview(event.target.value)}
+                      placeholder="Enlighten us!"
+                      as="textarea"
+                      rows={3}
+                      style={{ width: "500px" }}
+                    />
                   </Col>
-                </Row>
-                <br />
-                <Row xs={1} md={4} className="g-4">
                   <Col>
                     Cleanliness:{" "}
                     {cleanliness >= 0 ? cleanliness + "/10" : "Rate Here"}{" "}
@@ -483,9 +488,9 @@ const AptDetail = () => {
                       min={0}
                       max={10}
                       onChange={(event) => setCleanliness(event.target.value)}
+                      style={{ width: "400px" }}
                     />
-                  </Col>
-                  <Col>
+                    <br />
                     Maintenance:{" "}
                     {maintenance >= 0 ? maintenance + "/10" : "Rate Here"}{" "}
                     <br />
@@ -493,38 +498,34 @@ const AptDetail = () => {
                       min={0}
                       max={10}
                       onChange={(event) => setMaintenance(event.target.value)}
+                      style={{ width: "400px" }}
                     />
-                  </Col>
-                  <Col>
+                    <br />
                     Amenities:{" "}
                     {amenities >= 0 ? amenities + "/10" : "Rate Here"} <br />
                     <Form.Range
                       min={0}
                       max={10}
                       onChange={(event) => setAmenities(event.target.value)}
+                      style={{ width: "400px" }}
                     />
-                  </Col>
-                  <Col>
+                    <br />
                     Conditions & Management:{" "}
                     {conditions >= 0 ? conditions + "/10" : "Rate Here"} <br />
                     <Form.Range
                       min={0}
                       max={10}
                       onChange={(event) => setConditions(event.target.value)}
+                      style={{ width: "400px" }}
                     />
                   </Col>
                 </Row>
                 <br />
-                <Form.Control
-                  onChange={(event) => setReview(event.target.value)}
-                  placeholder="Enlighten us!"
-                  as="textarea"
-                  rows={3}
-                />
-                <br />
-                <Button type="button" onClick={handleSubmit}>
-                  Submit
-                </Button>
+                <div class="submitbutton">
+                  <Button type="button" onClick={handleSubmit}>
+                    Submit
+                  </Button>
+                </div>
               </Form.Group>
             </Form>
           </div>
