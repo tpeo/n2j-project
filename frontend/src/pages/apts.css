@@ -27,17 +27,16 @@
 }
 
 .aptlist {
-  margin-left: 300px;
+  /* margin-left: 300px; */
 }
 
 .aptcards {
-  height: 200px;
-  width: 800px;
+  width: 600px;
 }
 
 .images {
   width: 100%;
-  height: 15vw;
+  height: 12vw;
   object-fit: cover;
 }
 
@@ -72,4 +71,23 @@ a:active {
 
 h1 {
   font-family: "neue-haas-grotesk-display";
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.left,
+.right {
+  height: 100vh;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .left,
+  .right {
+    height: 100vh;
+  }
 }
