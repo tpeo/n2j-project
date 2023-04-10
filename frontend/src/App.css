@@ -37,10 +37,9 @@
   }
 }
 
-.aptlist {
+/* .aptlist {
   margin: 2% 7% 2% 3%;
-  /*--navbar-close: 2% 10%; */
-}
+} */
 
 .aptgrid {
   display: flex;

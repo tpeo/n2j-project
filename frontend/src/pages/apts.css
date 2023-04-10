@@ -26,10 +26,6 @@
   font-stretch: normal;
 }
 
-.aptlist {
-  /* margin-left: 300px; */
-}
-
 .aptcards {
   width: 600px;
 }
@@ -102,6 +98,11 @@ iframe {
 .right {
   height: 100vh;
   width: 100%;
+}
+
+.aptlist {
+  margin: 2% 7% 2% 3%;
+  /*--navbar-close: 2% 10%; */
 }
 
 @media screen and (min-width: 768px) {

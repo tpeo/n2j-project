@@ -130,408 +130,418 @@ const AptDetail = () => {
   };
 
   return (
-    <div class="aptlist">
+    <div>
       <div class="image">
-        {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
+        {apt["aptimage"] && (
+          <Image
+            style={{ width: "100%", margin: "0", padding: "0" }}
+            src={apt["aptimage"]}
+            thumbnail
+          />
+        )}
       </div>
-      <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
-      <br />
-      <br />
-      <h2>Floor Plans</h2>
-      <Row xs={1} md={3} className="g-4">
-        {apt["floor_plans"] &&
-          apt["floor_plans"].map((fp) => (
-            <div>
-              <br />
-              <Col>
-                <Card>
+      <div class="aptlist">
+        <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
+        <br />
+        <br />
+        <h2>Floor Plans</h2>
+        <Row xs={1} md={3} className="g-4">
+          {apt["floor_plans"] &&
+            apt["floor_plans"].map((fp) => (
+              <div>
+                <br />
+                <Col>
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>{fp["name"]}</Card.Title>
+                      <Card.Text>
+                        Cost*: {fp["cost"]}
+                        <br />
+                        {fp["br"]} BR | {fp["ba"]} BA <br />
+                        Per-room: {fp["is_double"] ? "DOUBLE" : "SINGLE"}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </div>
+            ))}
+        </Row>
+        <br />
+        <h2>Amenities</h2>
+        <div class="aptgrid">
+          {apt["amenities"] &&
+            apt["amenities"].map((amenity) => (
+              <div class="items">
+                <br />
+                <Card style={mystyle}>
                   <Card.Body>
-                    <Card.Title>{fp["name"]}</Card.Title>
+                    <Card.Title>
+                      <div class="amenities">
+                        <p class="amenitstyle">{amenity}</p>
+                      </div>
+                    </Card.Title>
+                    <Card.Text></Card.Text>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+        </div>
+        <br />
+        <h2>Additional Fees</h2>
+        <br />
+        <div class="aptgrid">
+          {apt["fees"] &&
+            apt["fees"].map((fee) => (
+              <div class="items">
+                <br />
+                <Card class="aptcard" style={mystyle}>
+                  <Card.Body>
+                    <Card.Title>
+                      <div class="additfees">
+                        <b>{fee["name"]}</b>
+                      </div>
+                    </Card.Title>
                     <Card.Text>
-                      Cost*: {fp["cost"]}
+                      <div class="additfees">Interval: {fee["interval"]}</div>
                       <br />
-                      {fp["br"]} BR | {fp["ba"]} BA <br />
-                      Per-room: {fp["is_double"] ? "DOUBLE" : "SINGLE"}
+                      <h2>
+                        <b>${fee["amount"]}</b>
+                      </h2>
                     </Card.Text>
                   </Card.Body>
                 </Card>
-              </Col>
-            </div>
-          ))}
-      </Row>
-      <br />
-      <h2>Amenities</h2>
-      <div class="aptgrid">
-        {apt["amenities"] &&
-          apt["amenities"].map((amenity) => (
-            <div class="items">
-              <br />
-              <Card style={mystyle}>
-                <Card.Body>
-                  <Card.Title>
-                    <div class="amenities">
-                      <p class="amenitstyle">{amenity}</p>
-                    </div>
-                  </Card.Title>
-                  <Card.Text></Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
-          ))}
-      </div>
-      <br />
-      <h2>Additional Fees</h2>
-      <br />
-      <div class="aptgrid">
-        {apt["fees"] &&
-          apt["fees"].map((fee) => (
-            <div class="items">
-              <br />
-              <Card class="aptcard" style={mystyle}>
-                <Card.Body>
-                  <Card.Title>
-                    <div class="additfees">
-                      <b>{fee["name"]}</b>
-                    </div>
-                  </Card.Title>
-                  <Card.Text>
-                    <div class="additfees">Interval: {fee["interval"]}</div>
-                    <br />
-                    <h2>
-                      <b>${fee["amount"]}</b>
-                    </h2>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
-          ))}
-      </div>
-      <br />
-      <br />
-      {email ? (
-        <div>
-          <div class="avgbox">
-            <div>
-              <h2>Reviews </h2>
-              <h2 class="avgrating">
-                {apt["reviews"] &&
-                  parseFloat(
-                    apt["reviews"].reduce(
-                      (v, review) =>
-                        (v =
-                          v +
-                          parseInt(review["cleanliness"], 10) +
-                          parseInt(review["maintenance"], 10) +
-                          parseInt(review["amenities"], 10) +
-                          parseInt(review["conditions"], 10)),
-                      0
-                    ) / (4 * apt["reviews"].length).toFixed(1)
-                  )}{" "}
-                / 10
-              </h2>
-              <p class="numreviews">
-                {apt["reviews"] && apt["reviews"].length} verified reviews
-              </p>
-            </div>
-            <div class="vl"></div>
-            <div class="ratingbars">
-              <div class="ratingitems">
-                <p>Cleanliness</p>
-                <ProgressBar
-                  now={
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["cleanliness"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    ) * 10
-                  }
-                  label={`${
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["cleanliness"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    )
-                  }/10`}
-                />
               </div>
-              <div class="ratingitems">
-                <p>Maintenance</p>
-                <ProgressBar
-                  now={
-                    apt["reviews"] &&
+            ))}
+        </div>
+        <br />
+        <br />
+        {email ? (
+          <div>
+            <div class="avgbox">
+              <div>
+                <h2>Reviews </h2>
+                <h2 class="avgrating">
+                  {apt["reviews"] &&
                     parseFloat(
                       apt["reviews"].reduce(
                         (v, review) =>
-                          (v = v + parseInt(review["maintenance"], 10)),
+                          (v =
+                            v +
+                            parseInt(review["cleanliness"], 10) +
+                            parseInt(review["maintenance"], 10) +
+                            parseInt(review["amenities"], 10) +
+                            parseInt(review["conditions"], 10)),
                         0
-                      ) / apt["reviews"].length.toFixed(1)
-                    ) * 10
-                  }
-                  label={`${
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["maintenance"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    )
-                  }/10`}
-                />
+                      ) / (4 * apt["reviews"].length).toFixed(1)
+                    )}{" "}
+                  / 10
+                </h2>
+                <p class="numreviews">
+                  {apt["reviews"] && apt["reviews"].length} verified reviews
+                </p>
               </div>
-            </div>
-            <div style={{ width: "300px" }}>
-              <div class="ratingitems">
-                <p>Amenities</p>
-                <ProgressBar
-                  now={
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["amenities"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    ) * 10
-                  }
-                  label={`${
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["amenities"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    )
-                  }/10`}
-                />
-              </div>
-              <div class="ratingitems">
-                <p>Conditions</p>
-                <ProgressBar
-                  now={
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["conditions"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    ) * 10
-                  }
-                  label={`${
-                    apt["reviews"] &&
-                    parseFloat(
-                      apt["reviews"].reduce(
-                        (v, review) =>
-                          (v = v + parseInt(review["conditions"], 10)),
-                        0
-                      ) / apt["reviews"].length.toFixed(1)
-                    )
-                  }/10`}
-                />
-              </div>
-            </div>
-          </div>
-          <br />
-          <div class="hl"></div>
-          {apt["reviews"] ? (
-            apt["reviews"].map((review) => {
-              return (
-                <div>
-                  <List
-                    sx={{
-                      width: "100%",
-                      bgcolor: "background.paper",
-                    }}
-                  >
-                    <ListItem alignItems="flex-start">
-                      <ListItemAvatar>
-                        <Avatar alt={review["name"]} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography>
-                            <h4>{review["title"]}</h4>
-                            <p class="reviewname">{review["name"]}</p>
-                            <p class="reviewplan">{review["floorplan"]}</p>
-                          </Typography>
-                        }
-                        secondary={
-                          <Typography>
-                            <Row xs={1} md={4} className="g-4">
-                              <Col>
-                                <div classname="progressbar">Cleanliness</div>
-                                <ProgressBar
-                                  now={review["cleanliness"] * 10}
-                                  label={`${review["cleanliness"]}/10`}
-                                />
-                              </Col>
-                              <Col>
-                                <div classname="progressbar">Maintenance</div>
-                                <ProgressBar
-                                  now={review["maintenance"] * 10}
-                                  label={`${review["maintenance"]}/10`}
-                                />
-                              </Col>
-                              <Col>
-                                <div classname="progressbar">Amenities</div>
-                                <ProgressBar
-                                  now={review["amenities"] * 10}
-                                  label={`${review["amenities"]}/10`}
-                                />
-                              </Col>
-                              <Col>
-                                <div classname="progressbar">
-                                  Conditions & Management
-                                </div>
-                                <ProgressBar
-                                  now={review["conditions"] * 10}
-                                  label={`${review["conditions"]}/10`}
-                                />
-                              </Col>
-                            </Row>
-                            <br />
-                            <div class="reviewcontent">
-                              <p> {review["review"]} </p>
-                              <p>
-                                <i>{Date(review["timestamp"])}</i>
-                              </p>
-                            </div>
-                          </Typography>
-                        }
-                      />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                  </List>
+              <div class="vl"></div>
+              <div class="ratingbars">
+                <div class="ratingitems">
+                  <p>Cleanliness</p>
+                  <ProgressBar
+                    now={
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["cleanliness"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      ) * 10
+                    }
+                    label={`${
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["cleanliness"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      )
+                    }/10`}
+                  />
                 </div>
-              );
-            })
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-        </div>
-      ) : (
-        <p>Review not viewable before log in.</p>
-      )}
-      <br />
-      <h2>Add Your Review</h2>
-      {email ? (
-        <div>
-          <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Add comment here</Form.Label>
+                <div class="ratingitems">
+                  <p>Maintenance</p>
+                  <ProgressBar
+                    now={
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["maintenance"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      ) * 10
+                    }
+                    label={`${
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["maintenance"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      )
+                    }/10`}
+                  />
+                </div>
+              </div>
+              <div style={{ width: "300px" }}>
+                <div class="ratingitems">
+                  <p>Amenities</p>
+                  <ProgressBar
+                    now={
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["amenities"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      ) * 10
+                    }
+                    label={`${
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["amenities"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      )
+                    }/10`}
+                  />
+                </div>
+                <div class="ratingitems">
+                  <p>Conditions</p>
+                  <ProgressBar
+                    now={
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["conditions"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      ) * 10
+                    }
+                    label={`${
+                      apt["reviews"] &&
+                      parseFloat(
+                        apt["reviews"].reduce(
+                          (v, review) =>
+                            (v = v + parseInt(review["conditions"], 10)),
+                          0
+                        ) / apt["reviews"].length.toFixed(1)
+                      )
+                    }/10`}
+                  />
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="hl"></div>
+            {apt["reviews"] ? (
+              apt["reviews"].map((review) => {
+                return (
+                  <div>
+                    <List
+                      sx={{
+                        width: "100%",
+                        bgcolor: "background.paper",
+                      }}
+                    >
+                      <ListItem alignItems="flex-start">
+                        <ListItemAvatar>
+                          <Avatar alt={review["name"]} />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={
+                            <Typography>
+                              <h4>{review["title"]}</h4>
+                              <p class="reviewname">{review["name"]}</p>
+                              <p class="reviewplan">{review["floorplan"]}</p>
+                            </Typography>
+                          }
+                          secondary={
+                            <Typography>
+                              <Row xs={1} md={4} className="g-4">
+                                <Col>
+                                  <div classname="progressbar">Cleanliness</div>
+                                  <ProgressBar
+                                    now={review["cleanliness"] * 10}
+                                    label={`${review["cleanliness"]}/10`}
+                                  />
+                                </Col>
+                                <Col>
+                                  <div classname="progressbar">Maintenance</div>
+                                  <ProgressBar
+                                    now={review["maintenance"] * 10}
+                                    label={`${review["maintenance"]}/10`}
+                                  />
+                                </Col>
+                                <Col>
+                                  <div classname="progressbar">Amenities</div>
+                                  <ProgressBar
+                                    now={review["amenities"] * 10}
+                                    label={`${review["amenities"]}/10`}
+                                  />
+                                </Col>
+                                <Col>
+                                  <div classname="progressbar">
+                                    Conditions & Management
+                                  </div>
+                                  <ProgressBar
+                                    now={review["conditions"] * 10}
+                                    label={`${review["conditions"]}/10`}
+                                  />
+                                </Col>
+                              </Row>
+                              <br />
+                              <div class="reviewcontent">
+                                <p> {review["review"]} </p>
+                                <p>
+                                  <i>{Date(review["timestamp"])}</i>
+                                </p>
+                              </div>
+                            </Typography>
+                          }
+                        />
+                      </ListItem>
+                      <Divider variant="inset" component="li" />
+                    </List>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No reviews yet.</p>
+            )}
+          </div>
+        ) : (
+          <p>Review not viewable before log in.</p>
+        )}
+        <br />
+        <h2>Add Your Review</h2>
+        {email ? (
+          <div>
+            <Form>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>Add comment here</Form.Label>
 
-              <Row xs={1} md={2} className="g-4">
-                <Col>
-                  <Form.Control
-                    onChange={(event) => setTitle(event.target.value)}
-                    placeholder="Give us a tldr :)"
-                    as="textarea"
-                    rows={1}
-                  />
-                </Col>
-                <Col>
-                  <Form.Select
-                    value={floorplan}
-                    onChange={(e) => setFloorplan(e.target.value)}
-                    aria-label="Floor Plan Selector"
-                  >
-                    <option value="">Select Floor Plan</option>
-                    {apt["floor_plans"] &&
-                      apt["floor_plans"].map((fp) => (
-                        <option value={fp["name"]}>{fp["name"]}</option>
-                      ))}
-                  </Form.Select>
-                </Col>
-              </Row>
-              <br />
-              <Row xs={1} md={4} className="g-4">
-                <Col>
-                  Cleanliness:{" "}
-                  {cleanliness >= 0 ? cleanliness + "/10" : "Rate Here"} <br />
-                  <Form.Range
-                    min={0}
-                    max={10}
-                    onChange={(event) => setCleanliness(event.target.value)}
-                  />
-                </Col>
-                <Col>
-                  Maintenance:{" "}
-                  {maintenance >= 0 ? maintenance + "/10" : "Rate Here"} <br />
-                  <Form.Range
-                    min={0}
-                    max={10}
-                    onChange={(event) => setMaintenance(event.target.value)}
-                  />
-                </Col>
-                <Col>
-                  Amenities: {amenities >= 0 ? amenities + "/10" : "Rate Here"}{" "}
-                  <br />
-                  <Form.Range
-                    min={0}
-                    max={10}
-                    onChange={(event) => setAmenities(event.target.value)}
-                  />
-                </Col>
-                <Col>
-                  Conditions & Management:{" "}
-                  {conditions >= 0 ? conditions + "/10" : "Rate Here"} <br />
-                  <Form.Range
-                    min={0}
-                    max={10}
-                    onChange={(event) => setConditions(event.target.value)}
-                  />
-                </Col>
-              </Row>
-              <br />
-              <Form.Control
-                onChange={(event) => setReview(event.target.value)}
-                placeholder="Enlighten us!"
-                as="textarea"
-                rows={3}
-              />
-              <br />
-              <Button type="button" onClick={handleSubmit}>
-                Submit
-              </Button>
-            </Form.Group>
-          </Form>
-        </div>
-      ) : (
-        <p>Log in to leave a review.</p>
-      )}
-      <br />
-      <h2>Notes</h2>
-      <p>
-        Costs are per month, not including fees.
+                <Row xs={1} md={2} className="g-4">
+                  <Col>
+                    <Form.Control
+                      onChange={(event) => setTitle(event.target.value)}
+                      placeholder="Give us a tldr :)"
+                      as="textarea"
+                      rows={1}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Select
+                      value={floorplan}
+                      onChange={(e) => setFloorplan(e.target.value)}
+                      aria-label="Floor Plan Selector"
+                    >
+                      <option value="">Select Floor Plan</option>
+                      {apt["floor_plans"] &&
+                        apt["floor_plans"].map((fp) => (
+                          <option value={fp["name"]}>{fp["name"]}</option>
+                        ))}
+                    </Form.Select>
+                  </Col>
+                </Row>
+                <br />
+                <Row xs={1} md={4} className="g-4">
+                  <Col>
+                    Cleanliness:{" "}
+                    {cleanliness >= 0 ? cleanliness + "/10" : "Rate Here"}{" "}
+                    <br />
+                    <Form.Range
+                      min={0}
+                      max={10}
+                      onChange={(event) => setCleanliness(event.target.value)}
+                    />
+                  </Col>
+                  <Col>
+                    Maintenance:{" "}
+                    {maintenance >= 0 ? maintenance + "/10" : "Rate Here"}{" "}
+                    <br />
+                    <Form.Range
+                      min={0}
+                      max={10}
+                      onChange={(event) => setMaintenance(event.target.value)}
+                    />
+                  </Col>
+                  <Col>
+                    Amenities:{" "}
+                    {amenities >= 0 ? amenities + "/10" : "Rate Here"} <br />
+                    <Form.Range
+                      min={0}
+                      max={10}
+                      onChange={(event) => setAmenities(event.target.value)}
+                    />
+                  </Col>
+                  <Col>
+                    Conditions & Management:{" "}
+                    {conditions >= 0 ? conditions + "/10" : "Rate Here"} <br />
+                    <Form.Range
+                      min={0}
+                      max={10}
+                      onChange={(event) => setConditions(event.target.value)}
+                    />
+                  </Col>
+                </Row>
+                <br />
+                <Form.Control
+                  onChange={(event) => setReview(event.target.value)}
+                  placeholder="Enlighten us!"
+                  as="textarea"
+                  rows={3}
+                />
+                <br />
+                <Button type="button" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </Form.Group>
+            </Form>
+          </div>
+        ) : (
+          <p>Log in to leave a review.</p>
+        )}
         <br />
-        <br />
-        We are not affiliated with any of the apartments listed on this site.
-        While we make our best effort to keep information up-to-date, we are not
-        able to guarantee the accuracy of the information provided. Please
-        contact the apartment directly for more information.
-      </p>
-      <Modal show={modalShow} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Comment {modalTitle} submitted!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{modalBody}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <h2>Notes</h2>
+        <p>
+          Costs are per month, not including fees.
+          <br />
+          <br />
+          We are not affiliated with any of the apartments listed on this site.
+          While we make our best effort to keep information up-to-date, we are
+          not able to guarantee the accuracy of the information provided. Please
+          contact the apartment directly for more information.
+        </p>
+        <Modal show={modalShow} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Comment {modalTitle} submitted!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{modalBody}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </div>
   );
 };
