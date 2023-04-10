@@ -54,7 +54,7 @@ const AptDetail = () => {
 
   useEffect(() => {
     const fetchApt = async () =>
-      await fetch("http://localhost:4000/get-apt", {
+      await fetch("https://n2j-project-backend.vercel.app/get-apt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -72,7 +72,7 @@ const AptDetail = () => {
     const dateTime = Date.now();
     const timestamp = Math.floor(dateTime / 1000);
     const postReview = async () =>
-      await fetch("http://localhost:4000/add-review", {
+      await fetch("https://n2j-project-backend.vercel.app/add-review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
