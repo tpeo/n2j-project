@@ -135,20 +135,6 @@ const AptDetail = () => {
         {apt["aptimage"] && <Image src={apt["aptimage"]} thumbnail />}
       </div>
       <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
-      <h2>Map</h2>
-      {apt["mapembed"] && (
-        <div>
-          <iframe
-            src={apt["mapembed"]}
-            width="70%"
-            height="450"
-            style={{ "text-align": "center" }}
-            allowfullscreen=""
-            loading="lazy"
-            title="map"
-          ></iframe>
-        </div>
-      )}
       <br />
       <br />
       <h2>Floor Plans</h2>
