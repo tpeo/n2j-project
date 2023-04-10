@@ -130,14 +130,14 @@ const Layout = () => {
               <span>All Apartments</span>
             </a>
           </li>
-          <li className="nav-text">
-            <a href="/myapts">
-              <BookmarkBorder />
-              <span>My Apartments</span>
-            </a>
-          </li>
           {email ? (
             <div>
+              <li className="nav-text">
+                <a href="/myapts">
+                  <BookmarkBorder />
+                  <span>My Apartments</span>
+                </a>
+              </li>
               <li className="nav-text">
                 <a href="/user">
                   <AccountCircle />

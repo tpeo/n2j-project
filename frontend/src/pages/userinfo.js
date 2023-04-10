@@ -83,7 +83,7 @@ const UserInfo = () => {
           <div class="flexcontainer">
             <div class="aptcards">
               <i>
-                <p>Welcome! See your apartments below:</p>
+                {email ? <p>Welcome! See your apartments below:</p> : <p>To use this page, please log in first.</p>}
               </i>
               <Row xs={1} md={2} className="g-4">
                 {apts &&
