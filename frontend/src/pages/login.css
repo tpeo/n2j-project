@@ -1,0 +1,30 @@
+.loginscreen {
+  margin-left: 42%;
+  margin-top: 20%;
+}
+
+.loginelement {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loginletter {
+  margin-bottom: 20px;
+  margin-left: 180px;
+}
+
+.inner {
+  margin-top: 150px;
+  margin-left: 700px;
+  margin-bottom: 30px;
+}
+
+.user {
+  margin-left: 187px;
+  margin-bottom: 30px;
+}
+
+.caption {
+  text-align: center;
+  margin-bottom: 30px;
+}
