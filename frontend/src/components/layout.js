@@ -159,12 +159,6 @@ const Layout = () => {
                   <span>Log in</span>
                 </a>
               </li>
-              <li className="nav-text">
-                <a href="/signup">
-                  <SignLanguage />
-                  <span>Sign up</span>
-                </a>
-              </li>
             </div>
           )}
         </ul>
