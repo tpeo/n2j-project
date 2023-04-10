@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Button, Card, Modal, Form } from "react-bootstrap";
+import { Button, Card, Modal, Form, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import "./userinfo.css";
 import AuthContext from "../context/authentication.js";
+import { AddCircle } from "@mui/icons-material";
 
 const UserInfo = () => {
   const [user, setUser] = useState([]);
@@ -78,80 +80,90 @@ const UserInfo = () => {
       <h2>User Profile</h2>
       {user && (
         <div>
-          <i>
-            <p>Welcome! See your apartments below:</p>
-          </i>
-          <br />
-          {/* {apts &&
-            apts.map((apt) => (
-              <Card>
-                <Card.Title>{apt["name"]}</Card.Title>
-              </Card>
-            ))} */}
-          {apts &&
-            apts.map((apt) => (
-              <div>
-                <br />
-                <a href={"/apts/" + apt["apt_id"]}>
-                  <Card class="entirecard">
-                    <Card.Body>
-                      <Card.Img
-                        variant="top"
-                        src={apt["aptimage"]}
-                        class="images"
-                      />
+          <div class="flexcontainer">
+            <div class="aptcards">
+              <i>
+                <p>Welcome! See your apartments below:</p>
+              </i>
+              <Row xs={1} md={2} className="g-4">
+                {apts &&
+                  apts.map((apt) => (
+                    <div class="widthadjust">
                       <br />
-                      <Card.Title class="aptname">{apt["name"]}</Card.Title>
-                      <Card.Text class="content">
-                        Apartment ID: {apt["apt_id"]}
-                        <br />
-                        Rating:{" "}
-                        {apt["reviews"] &&
-                          parseFloat(
-                            apt["reviews"].reduce(
-                              (v, review) =>
-                                (v =
-                                  v +
-                                  parseInt(review["cleanliness"], 10) +
-                                  parseInt(review["maintenance"], 10) +
-                                  parseInt(review["amenities"], 10) +
-                                  parseInt(review["conditions"], 10)),
-                              0
-                            ) / (4 * apt["reviews"].length).toFixed(1)
-                          )}
-                        <br />
-                        {apt["address"]}
-                        <br />
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </a>
-              </div>
-            ))}
+                      <Col>
+                        <a href={"/apts/" + apt["apt_id"]}>
+                          <Card class="entirecard">
+                            <Card.Body>
+                              <Card.Img
+                                variant="top"
+                                src={apt["aptimage"]}
+                                class="images"
+                              />
+                              <br />
+                              <Card.Title class="aptname">
+                                {apt["name"]}
+                              </Card.Title>
+                              <Card.Text class="content">
+                                Apartment ID: {apt["apt_id"]}
+                                <br />
+                                Rating:{" "}
+                                {apt["reviews"] &&
+                                  parseFloat(
+                                    apt["reviews"].reduce(
+                                      (v, review) =>
+                                        (v =
+                                          v +
+                                          parseInt(review["cleanliness"], 10) +
+                                          parseInt(review["maintenance"], 10) +
+                                          parseInt(review["amenities"], 10) +
+                                          parseInt(review["conditions"], 10)),
+                                      0
+                                    ) / (4 * apt["reviews"].length).toFixed(1)
+                                  )}
+                                <br />
+                                {apt["address"]}
+                                <br />
+                              </Card.Text>
+                              {/* <Button href={"/apts/" + apt["apt_id"]}>See More</Button> */}
+                            </Card.Body>
+                          </Card>
+                        </a>
+                      </Col>
+                    </div>
+                  ))}
+              </Row>
+            </div>
+            <div class="addnew">
+              <h2>Add Apartment to your List</h2>
+              <Form>
+                <div class="addbar">
+                  <AddCircle
+                    onClick={handleSubmit}
+                    style={{ color: "#f2c87d", margin: "10px" }}
+                  />
+                  <Form.Control
+                    onChange={(event) => setAptid(event.target.value)}
+                    placeholder="Enter Apartment ID"
+                    style={{ width: "400px", border: "none" }}
+                  />
+                </div>
+              </Form>
+              <Modal show={modalShow} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Apartment {modalTitle} added!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modalBody}</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+          </div>
         </div>
       )}
       <br />
-      <h1>Add Apartment to your List</h1>
-      <Form>
-        <Form.Control
-          onChange={(event) => setAptid(event.target.value)}
-          placeholder="Enter Apartment ID"
-        />
-        <Button variant="primary" type="button" onClick={handleSubmit}>
-          Add
-        </Button>
-      </Form>
-      <Modal show={modalShow} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Apartment {modalTitle} added!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{modalBody}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

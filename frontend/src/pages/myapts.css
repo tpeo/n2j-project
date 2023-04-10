@@ -1,0 +1,29 @@
+.aptcards {
+  width: 600px;
+}
+
+.images {
+  width: 100%;
+  height: 12vw;
+  object-fit: cover;
+}
+
+iframe {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.left,
+.right {
+  height: 100vh;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .left,
+  .right {
+    height: 100vh;
+  }
+}
