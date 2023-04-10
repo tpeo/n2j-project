@@ -134,14 +134,26 @@ const AptDetail = () => {
       <div class="image">
         {apt["aptimage"] && (
           <Image
-            style={{ width: "100%", margin: "0", padding: "0" }}
+            style={{
+              width: "100%",
+              height: "80vh",
+              margin: "0",
+              padding: "0",
+            }}
             src={apt["aptimage"]}
             thumbnail
           />
         )}
+        <div class="letter">
+          <h1 class="aptitle">
+            {apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}
+          </h1>
+          <h5 class="apaddress">
+            {apt["address"] ? apt["address"] : "unknown address"}
+          </h5>
+        </div>
       </div>
       <div class="aptlist">
-        <h1>{apt["name"] ? apt["name"] : "APARTMENT NOT FOUND"}</h1>
         <br />
         <br />
         <h2>Floor Plans</h2>

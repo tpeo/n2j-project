@@ -44,6 +44,25 @@ h2 {
   color: #2d2d2d;
 }
 
+.letter {
+  position: absolute;
+  bottom: 150px;
+  left: 70px;
+  backdrop-filter: blur(8px);
+}
+
+.aptitle {
+  font-family: "ivypresto-display";
+  font-size: 70px;
+  color: white;
+}
+
+.apaddress {
+  font-family: "neue-haas-grotesk-display";
+  font-size: 30px;
+  color: white;
+}
+
 .amenities {
   inline-size: 140px;
   overflow-wrap: break-word;
